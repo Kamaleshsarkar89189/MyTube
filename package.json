@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.12.0",
+    "@clerk/themes": "^2.2.36",
     "@hookform/resolvers": "^4.1.0",
     "@mux/mux-node": "^9.0.1",
     "@mux/mux-player-react": "^3.2.4",

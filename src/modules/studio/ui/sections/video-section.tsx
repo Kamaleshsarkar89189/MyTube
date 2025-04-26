@@ -110,7 +110,7 @@ const VideoSectionSuspense = () => {
                         {videos.pages.flatMap((page) => page.items).map((video) => (
                             <Link href={`/studio/videos/${video.id}`} key={video.id} legacyBehavior>
                                 <TableRow className="cursor-pointer">
-                                    <TableCell className="pl-6">
+                                    <TableCell className="pl-6op">
                                         <div className="flex items-center gap-4">
                                             <div className="relative aspect-video w-36 shrink-0">
                                                 <VideoThumbnail
