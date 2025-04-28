@@ -18,7 +18,6 @@ interface VideoMenuProps {
     onRemove?: () => void;
 }
 
-//TODO: implement due
 const VideoMenu = ({
     videoId,
     variant = "ghost",
@@ -33,11 +32,11 @@ const VideoMenu = ({
     }
     return (
         <>
-        <PlaylistAddModal
-        videoId={videoId}
-         open={isOpenPlaylistAddModal}
-         onOpenChange={setIsOpenPlaylistAddModal}
-        />
+            <PlaylistAddModal
+                videoId={videoId}
+                open={isOpenPlaylistAddModal}
+                onOpenChange={setIsOpenPlaylistAddModal}
+            />
             <DropdownMenu modal={false}>
                 <DropdownMenuTrigger asChild>
                     <Button variant={variant} size="icon" className="rounded-full">
@@ -54,7 +53,7 @@ const VideoMenu = ({
                         Add to playlist
                     </DropdownMenuItem>
                     {onRemove && (
-                        <DropdownMenuItem onClick={() => { }}>
+                        <DropdownMenuItem onClick={onRemove}>
                             <Trash2Icon className="mr-2 size-4" />
                             Remove
                         </DropdownMenuItem>

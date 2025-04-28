@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { SearchInput } from "./search-input";
 import { AuthButton } from "@/modules/auth/ui/components/auth-button";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export const HomeNavbar = () => {
     return (
@@ -12,7 +11,7 @@ export const HomeNavbar = () => {
                 {/* Menu and logo */}
                 <div className="flex items-center flex-shrink-0">
                     <SidebarTrigger />
-                    <Link href="/">
+                    <Link prefetch  href="/" className="hidden md:block">
                         <div className="p-4 flex items-center gap-1">
                             <Image src="/logo.svg" alt="Logo" width={32} height={32} />
                             <p className="text-xl font-semibold tracking-tight text-foreground">MyTube</p>
@@ -24,7 +23,7 @@ export const HomeNavbar = () => {
                     <SearchInput />
                 </div>
                 <div className="flex-shrink-0 items-center flex gap-4">
-                    <ThemeToggle />
+                    {/* <ThemeToggle /> */}
                     <AuthButton />
                 </div>
             </div>

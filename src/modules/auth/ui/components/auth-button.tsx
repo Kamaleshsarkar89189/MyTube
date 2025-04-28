@@ -1,8 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { ClapperboardIcon, UserCircleIcon } from "lucide-react"
+import { ClapperboardIcon, UserCircleIcon, UserIcon } from "lucide-react"
 import Link from "next/link";
 
 export const AuthButton = () => {
@@ -10,19 +11,25 @@ export const AuthButton = () => {
         <>
             <SignedIn>
                 {/* If you want to customize more.. */}
-                <Button asChild variant="secondary">
-                <Link href="/studio">
-                <ClapperboardIcon />
-                Studio
-                </Link>
-            </Button>
+                {/* <Button asChild variant="secondary">
+                    <Link prefetch  href="/studio">
+                        <ClapperboardIcon />
+                        Studio
+                    </Link>
+                </Button> */}
+                <ThemeToggle />
                 <UserButton>
                     <UserButton.MenuItems>
                         {/* Add menu item for Studio and User profile */}
                         <UserButton.Link
+                            label="My profile"
+                            href="/users/current"
+                            labelIcon={<ClapperboardIcon className="size-4" />}
+                        />
+                        <UserButton.Link
                             label="Studio"
                             href="/studio"
-                            labelIcon={<ClapperboardIcon className="size-4" />}
+                            labelIcon={<UserIcon className="size-4" />}
                         />
                         <UserButton.Action label="manageAccount" />
                     </UserButton.MenuItems>
