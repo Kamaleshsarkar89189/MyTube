@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { db } from "@/db";
 import { comments, users, videoReactions, videos, videoViews } from "@/db/schema";
-import { baseProcedure, createTRPCRouter, protectedProcedure } from "@/trpc/init";
+import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { eq, and, or, lt, desc, getTableColumns } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 

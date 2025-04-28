@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { ClapperboardIcon, UserCircleIcon, UserIcon } from "lucide-react"
-import Link from "next/link";
 
 export const AuthButton = () => {
     return (
