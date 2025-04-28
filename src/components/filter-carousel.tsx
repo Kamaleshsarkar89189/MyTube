@@ -8,6 +8,8 @@ import {
     CarouselApi,
     CarouselContent,
     CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Skeleton } from "./ui/skeleton";
 
@@ -30,7 +32,6 @@ export const FilterCarousel = ({
 }: FilterCarouselProps) => {
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [count, setCount] = useState(0);
 
     useEffect(() => {
@@ -50,7 +51,7 @@ export const FilterCarousel = ({
         <div className="relative w-full">
             {/* Left fade */}
             <div className={cn(
-                "absolute left-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none",
+                "absolute left-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-muted to-transparent pointer-events-none",
                 current === 1 && "hidden"
             )}/>
             <Carousel
@@ -61,7 +62,7 @@ export const FilterCarousel = ({
                 }}
                 className="w-full px-12"
             >
-                <CarouselContent className="-ml-3 flex overflow-x-auto scroll-smooth carousel-content">
+                <CarouselContent className="-ml-3">
                     {!isLoading && (
                     
                     <CarouselItem
@@ -100,13 +101,13 @@ export const FilterCarousel = ({
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                {/* <CarouselPrevious className="left-0 z-20"/>
-                <CarouselNext className="right-0 z-20"/> */}
+                 <CarouselPrevious className="left-0 z-20"/>
+                <CarouselNext className="right-0 z-20"/> 
             </Carousel>
             {/* Right fade */}
             <div className={cn(
-                "absolute right-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none",
-                current === 1 && "hidden"
+                "absolute right-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-muted to-transparent pointer-events-none",
+                current === count && "hidden"
             )} />
 
         </div>
