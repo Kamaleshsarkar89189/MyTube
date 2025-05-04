@@ -15,6 +15,8 @@ import { DEFAULT_LIMIT } from "@/constants";
 import { UserAvatar } from "@/components/user-avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ListIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { SheetClose } from "@/components/ui/sheet";
 
 
 export const LoadingSkeleton = () => {
@@ -44,6 +46,18 @@ export const SubscriptionsSection = () => {
         }
     );
 
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    const Wrapper = isMobile ? SheetClose : "div";
+
+
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Subscriptions</SidebarGroupLabel>
@@ -57,14 +71,16 @@ export const SubscriptionsSection = () => {
                                 asChild
                                 isActive={pathname === `/users/${subscription.user.id}`}
                             >
-                                <Link prefetch  href={`/users/${subscription.user.id}`} className="flex items-center gap-4">
-                                    <UserAvatar
-                                        size="xs"
-                                        imageUrl={subscription.user.imageUrl}
-                                        name={subscription.user.name}
-                                    />
-                                    <span className="text-sm">{subscription.user.name}</span>
-                                </Link>
+                                <Wrapper asChild>
+                                    <Link prefetch href={`/users/${subscription.user.id}`} className="flex items-center gap-4">
+                                        <UserAvatar
+                                            size="xs"
+                                            imageUrl={subscription.user.imageUrl}
+                                            name={subscription.user.name}
+                                        />
+                                        <span className="text-sm">{subscription.user.name}</span>
+                                    </Link>
+                                </Wrapper>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     ))}
@@ -74,10 +90,12 @@ export const SubscriptionsSection = () => {
                                 asChild
                                 isActive={pathname === "/subscriptions"}
                             >
-                                <Link prefetch  href="/subscriptions" className="flex items-center gap-4">
-                                    <ListIcon className="size-4" />
-                                    <span className="text-sm">All subscriptions</span>
-                                </Link>
+                                <Wrapper asChild>
+                                    <Link prefetch href="/subscriptions" className="flex items-center gap-4">
+                                        <ListIcon className="size-4" />
+                                        <span className="text-sm">All subscriptions</span>
+                                    </Link>
+                                </Wrapper>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     )}

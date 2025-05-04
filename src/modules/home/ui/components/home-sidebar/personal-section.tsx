@@ -14,6 +14,8 @@ import { useAuth, useClerk } from "@clerk/nextjs";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { SheetClose } from "@/components/ui/sheet";
 
 const items = [
     {
@@ -40,6 +42,18 @@ export const PersonalSection = () => {
     const clerk = useClerk();
     const { isSignedIn } = useAuth();
     const pathname = usePathname();
+
+    const [isMobile, setIsMobile] = useState(false);
+    
+        useEffect(() => {
+            const checkMobile = () => setIsMobile(window.innerWidth < 768);
+            checkMobile();
+            window.addEventListener("resize", checkMobile);
+            return () => window.removeEventListener("resize", checkMobile);
+        }, []);
+    
+        const Wrapper = isMobile ? SheetClose : "div";
+
     return (
         <SidebarGroup>
             <SidebarGroupLabel>You</SidebarGroupLabel>
@@ -58,11 +72,12 @@ export const PersonalSection = () => {
                                     }
                                 }}
                             >
+                                <Wrapper asChild>
                                 <Link prefetch  href={item.url} className="flex items-center gap-4">
                                     <item.icon />
                                     <span className="text-sm">{item.title}</span>
                                 </Link>
-
+                                </Wrapper>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     ))}
