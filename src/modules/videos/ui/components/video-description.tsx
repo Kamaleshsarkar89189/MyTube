@@ -18,6 +18,26 @@ export const VideoDescription = ({
     description,
 }: VideoDescriptionProps) => {
     const [isExpanded, setIsExpanded] = useState(false);
+
+    const renderDescription = (text: string) => {
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.split(urlRegex).map((part, i) =>
+            urlRegex.test(part) ? (
+                <a
+                    key={i}
+                    href={part}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 underline"
+                >
+                    {part}
+                </a>
+            ) : (
+                <span key={i}>{part}</span>
+            )
+        );
+    };
+
     return (
         <div
             onClick={() => setIsExpanded((current) => !current)}
@@ -36,7 +56,7 @@ export const VideoDescription = ({
                     "text-sm whitespace-pre-wrap",
                     !isExpanded && "line-clamp-2",
                 )}>
-                    {description || "No description"}
+                    {description ? renderDescription(description) : "No description"}
                 </p>
                 <div className="flex items-center gap-1 mt-4 text-sm font-medium">
                     {isExpanded ? (

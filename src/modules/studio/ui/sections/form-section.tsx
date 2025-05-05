@@ -44,6 +44,7 @@ import { ThumbnailUploadModal } from "../components/thumbnail-upload-modal";
 import { ThumbnailGenerateModal } from "../components/thumbnail-generate-modal";
 import { Skeleton } from "@/components/ui/skeleton";
 import { APP_URL } from "@/constants";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 interface FormSectionProps {
     videoId: string;
 }
@@ -217,6 +218,8 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
         }, 2000);
     };
 
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
     return (
         <>
             <ThumbnailGenerateModal
@@ -250,7 +253,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end">
-                                    <DropdownMenuItem onClick={() => remove.mutate({ id: videoId })}>
+                                    <DropdownMenuItem onClick={() => setIsDeleteModalOpen(true)}>
                                         <TrashIcon className="size-4 mr-2" />
                                         Delete
                                     </DropdownMenuItem>
@@ -516,6 +519,30 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     </div>
                 </form>
             </Form>
+
+            <Dialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Are you sure?</DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-muted-foreground">
+                        This action cannot be undone. This will permanently delete your video.
+                    </p>
+                    <DialogFooter>
+                        <Button variant="ghost" onClick={() => setIsDeleteModalOpen(false)}>
+                            Cancel
+                        </Button>
+                        <Button
+                            variant="destructive"
+                            onClick={() => remove.mutate({ id: videoId })}
+                            disabled={remove.isPending}
+                        >
+                            {remove.isPending ? "Deleting..." : "Delete"}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
         </>
     )
 }

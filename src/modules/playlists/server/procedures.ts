@@ -555,4 +555,31 @@ export const playlistsRouter = createTRPCRouter({
                 nextCursor
             };
         }),
+
+    removeHistory: protectedProcedure
+        .input(z.object({
+            videoId: z.string().uuid(), // ID of the video to remove from history
+        }))
+        .mutation(async ({ input, ctx }) => {
+            const { id: userId } = ctx.user;
+
+            await db.delete(videoViews).where(
+                and(
+                    eq(videoViews.userId, userId),
+                    eq(videoViews.videoId, input.videoId)
+                )
+            );
+
+            return { success: true };
+        }),
+
+    clearHistory: protectedProcedure
+        .mutation(async ({ ctx }) => {
+            const { id: userId } = ctx.user;
+
+            await db.delete(videoViews).where(eq(videoViews.userId, userId));
+
+            return { success: true };
+        }),
+
 });
