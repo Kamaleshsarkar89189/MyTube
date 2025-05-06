@@ -6,7 +6,7 @@ import {
     SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuItem
+    SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -17,7 +17,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ListIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { SheetClose } from "@/components/ui/sheet";
-
 
 export const LoadingSkeleton = () => {
     return (
@@ -34,13 +33,10 @@ export const LoadingSkeleton = () => {
     );
 };
 
-
 export const SubscriptionsSection = () => {
     const pathname = usePathname();
     const { data, isLoading } = trpc.subscriptions.getMany.useInfiniteQuery(
-        {
-            limit: DEFAULT_LIMIT,
-        },
+        { limit: DEFAULT_LIMIT },
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
         }
@@ -55,24 +51,22 @@ export const SubscriptionsSection = () => {
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
-    const Wrapper = isMobile ? SheetClose : "div";
-
-
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Subscriptions</SidebarGroupLabel>
             <SidebarGroupContent>
                 <SidebarMenu>
                     {isLoading && <LoadingSkeleton />}
-                    {!isLoading && data?.pages.flatMap((page) => page.items).map((subscription) => (
-                        <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerId}`}>
-                            <SidebarMenuButton
-                                tooltip={subscription.user.name}
-                                asChild
-                                isActive={pathname === `/users/${subscription.user.id}`}
-                            >
-                                <Wrapper asChild>
-                                    <Link prefetch href={`/users/${subscription.user.id}`} className="flex items-center gap-4">
+                    {!isLoading &&
+                        data?.pages
+                            .flatMap((page) => page.items)
+                            .map((subscription) => {
+                                const link = (
+                                    <Link
+                                        prefetch
+                                        href={`/users/${subscription.user.id}`}
+                                        className="flex items-center gap-4"
+                                    >
                                         <UserAvatar
                                             size="xs"
                                             imageUrl={subscription.user.imageUrl}
@@ -80,27 +74,48 @@ export const SubscriptionsSection = () => {
                                         />
                                         <span className="text-sm">{subscription.user.name}</span>
                                     </Link>
-                                </Wrapper>
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
-                    ))}
+                                );
+
+                                return (
+                                    <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerId}`}>
+                                        <SidebarMenuButton
+                                            tooltip={subscription.user.name}
+                                            asChild
+                                            isActive={pathname === `/users/${subscription.user.id}`}
+                                        >
+                                            {isMobile ? (
+                                                <SheetClose asChild>{link}</SheetClose>
+                                            ) : (
+                                                link
+                                            )}
+                                        </SidebarMenuButton>
+                                    </SidebarMenuItem>
+                                );
+                            })}
                     {!isLoading && (
                         <SidebarMenuItem>
                             <SidebarMenuButton
                                 asChild
                                 isActive={pathname === "/subscriptions"}
                             >
-                                <Wrapper asChild>
+                                {isMobile ? (
+                                    <SheetClose asChild>
+                                        <Link prefetch href="/subscriptions" className="flex items-center gap-4">
+                                            <ListIcon className="size-4" />
+                                            <span className="text-sm">All subscriptions</span>
+                                        </Link>
+                                    </SheetClose>
+                                ) : (
                                     <Link prefetch href="/subscriptions" className="flex items-center gap-4">
                                         <ListIcon className="size-4" />
                                         <span className="text-sm">All subscriptions</span>
                                     </Link>
-                                </Wrapper>
+                                )}
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     )}
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
-    )
-}
+    );
+};

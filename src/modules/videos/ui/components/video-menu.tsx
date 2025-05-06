@@ -13,6 +13,7 @@ import { useState } from "react";
 import { ShareModal } from "./share-modal";
 import { trpc } from "@/trpc/client";
 import { toast } from "sonner";
+import { usePathname } from "next/navigation";
 
 interface VideoMenuProps {
     videoId: string;
@@ -37,6 +38,8 @@ const VideoMenu = ({
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
     const utils = trpc.useUtils();
+
+    const pathname = usePathname();
 
     const removeFromHistory = trpc.playlists.removeHistory.useMutation({
         onSuccess: () => {
@@ -76,16 +79,17 @@ const VideoMenu = ({
                             Remove from playlist
                         </DropdownMenuItem>
                     )}
-                    <DropdownMenuItem
-                        onClick={() => removeFromHistory.mutate({ videoId })}
-                        disabled={removeFromHistory.isPending}
-                    >
-                        <Trash2Icon className="mr-2 size-4" />
-                        Remove from history
-                    </DropdownMenuItem>
+                    {pathname === "/playlists/history" && ( 
+                        <DropdownMenuItem
+                            onClick={() => removeFromHistory.mutate({ videoId })}
+                            disabled={removeFromHistory.isPending}
+                        >
+                            <Trash2Icon className="mr-2 size-4" />
+                            Remove from history
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
-
             <ShareModal
                 open={isShareModalOpen}
                 onOpenChange={setIsShareModalOpen}

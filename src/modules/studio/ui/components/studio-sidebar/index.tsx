@@ -1,7 +1,8 @@
 "use client";
-import Link from "next/link"
-import { LogOutIcon, VideoIcon } from "lucide-react"
-import { usePathname } from "next/navigation"
+
+import Link from "next/link";
+import { LogOutIcon, VideoIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import {
     Sidebar,
@@ -9,8 +10,8 @@ import {
     SidebarGroup,
     SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuItem
-} from "@/components/ui/sidebar"
+    SidebarMenuItem,
+} from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { StudioSidebarHeader } from "./studio-sidebar-header";
 import { useEffect, useState } from "react";
@@ -27,8 +28,6 @@ export const StudioSidebar = () => {
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
-    const Wrapper = isMobile ? SheetClose : "div";
-
     return (
         <Sidebar className="pt-16 z-40" collapsible="icon">
             <SidebarContent className="bg-background">
@@ -36,29 +35,49 @@ export const StudioSidebar = () => {
                     <SidebarMenu>
                         <StudioSidebarHeader />
                         <SidebarMenuItem>
-                            <SidebarMenuButton isActive={pathname === "/studio"} tooltip="Content" asChild>
-                                <Wrapper asChild>
+                            <SidebarMenuButton
+                                isActive={pathname === "/studio"}
+                                tooltip="Content"
+                                asChild
+                            >
+                                {isMobile ? (
+                                    <SheetClose asChild>
+                                        <Link prefetch href="/studio" className="flex items-center gap-2">
+                                            <VideoIcon className="size-5" />
+                                            <span className="text-sm">Content</span>
+                                        </Link>
+                                    </SheetClose>
+                                ) : (
                                     <Link prefetch href="/studio" className="flex items-center gap-2">
                                         <VideoIcon className="size-5" />
                                         <span className="text-sm">Content</span>
                                     </Link>
-                                </Wrapper>
+                                )}
                             </SidebarMenuButton>
                         </SidebarMenuItem>
+
                         <Separator />
+
                         <SidebarMenuItem>
                             <SidebarMenuButton tooltip="Exit studio" asChild>
-                                <Wrapper asChild>
+                                {isMobile ? (
+                                    <SheetClose asChild>
+                                        <Link prefetch href="/" className="flex items-center gap-3">
+                                            <LogOutIcon className="size-5" />
+                                            <span className="text-sm">Exit studio</span>
+                                        </Link>
+                                    </SheetClose>
+                                ) : (
                                     <Link prefetch href="/" className="flex items-center gap-3">
                                         <LogOutIcon className="size-5" />
                                         <span className="text-sm">Exit studio</span>
                                     </Link>
-                                </Wrapper>
+                                )}
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     </SidebarMenu>
                 </SidebarGroup>
             </SidebarContent>
         </Sidebar>
-    )
-}
+    );
+};

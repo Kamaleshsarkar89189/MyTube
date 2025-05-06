@@ -52,35 +52,49 @@ export const PersonalSection = () => {
             return () => window.removeEventListener("resize", checkMobile);
         }, []);
     
-        const Wrapper = isMobile ? SheetClose : "div";
+        // const Wrapper = isMobile ? SheetClose : "div";
 
     return (
         <SidebarGroup>
             <SidebarGroupLabel>You</SidebarGroupLabel>
             <SidebarGroupContent>
                 <SidebarMenu>
-                    {items.map((item) => (
-                        <SidebarMenuItem key={item.title}>
-                            <SidebarMenuButton
-                                tooltip={item.title}
-                                asChild
-                                isActive={pathname === item.url}
+                    {items.map((item) => {
+                        const isActive = pathname === item.url;
+
+                        const link = (
+                            <Link
+                                prefetch
+                                href={item.url}
+                                className="flex items-center gap-4"
                                 onClick={(e) => {
                                     if (!isSignedIn && item.auth) {
                                         e.preventDefault();
-                                        return clerk.openSignIn();
+                                        clerk.openSignIn();
                                     }
                                 }}
                             >
-                                <Wrapper asChild>
-                                <Link prefetch  href={item.url} className="flex items-center gap-4">
-                                    <item.icon />
-                                    <span className="text-sm">{item.title}</span>
-                                </Link>
-                                </Wrapper>
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
-                    ))}
+                                <item.icon />
+                                <span className="text-sm">{item.title}</span>
+                            </Link>
+                        );
+
+                        return (
+                            <SidebarMenuItem key={item.title}>
+                                <SidebarMenuButton
+                                    tooltip={item.title}
+                                    asChild
+                                    isActive={isActive}
+                                >
+                                    {isMobile ? (
+                                        <SheetClose asChild>{link}</SheetClose>
+                                    ) : (
+                                        link
+                                    )}
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        );
+                    })}
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
