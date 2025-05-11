@@ -151,7 +151,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     const revalidate = trpc.videos.revalidate.useMutation({
         onSuccess: () => {
             utils.studio.getMany.invalidate();
-            utils.studio.getOne.invalidate({ id: videoId});
+            utils.studio.getOne.invalidate({ id: videoId });
             toast.success("Video revalidated");
         },
         onError: () => {
@@ -168,7 +168,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
         },
     });
 
-    const generateTitle = trpc.videos.generateThumbnail.useMutation({
+    const generateTitle = trpc.videos.generateTitle.useMutation({
         onSuccess: () => {
             toast.success("Backgroud job stated", { description: "This may take some time" });
         },
@@ -176,15 +176,6 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
             toast.error("Something went wrong");
         },
     });
-    // NO NEED 
-    // const generateThumbnail = trpc.videos.generateThumbnail.useMutation({
-    //     onSuccess: () => {
-    //         toast.success("Backgroud job stated", { description: "This may take some time" });
-    //     },
-    //     onError: () => {
-    //         toast.error("Something went wrong");
-    //     },
-    // });
 
     const restoreThumbnail = trpc.videos.restoreThumbnail.useMutation({
         onSuccess: () => {
@@ -282,7 +273,6 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                                     className="rounded-full size-6 [&_svg]:size-3"
                                                     onClick={() => generateTitle.mutate({
                                                         id: videoId,
-                                                        prompt: ""
                                                     })}
                                                     disabled={generateTitle.isPending || !video.muxTrackId}
                                                 >
@@ -433,7 +423,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                                 Video Link
                                             </p>
                                             <div className="flex items-center gap-x-2">
-                                                <Link prefetch  href={`/videos/${video.id}`}>
+                                                <Link prefetch href={`/videos/${video.id}`}>
                                                     <p className="line-clamp-1 text-sm text-blue-500">
                                                         {fullUrl}
                                                     </p>
