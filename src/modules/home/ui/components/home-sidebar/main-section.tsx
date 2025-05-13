@@ -41,7 +41,7 @@ export const MainSection = () => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 668);  // 768 was the accurate value for every width
+        const checkMobile = () => setIsMobile(window.innerWidth < 568);  // 768 was the accurate value for every width
         checkMobile();
         window.addEventListener("resize", checkMobile);
         return () => window.removeEventListener("resize", checkMobile);
