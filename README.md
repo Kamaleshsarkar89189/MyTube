@@ -22,15 +22,113 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about this project, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 01 Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Configure environment
+    - runtime (Node.js, Bun)
+    - package manager (npm, pnpm, yarn, bun)
 
-## Deploy on Vercel
+- Why bun?
+    - You will get the same environment as I do some time
+    - Easily run TypeScript scripts with ES6 imports
+    - Less issues with dependency issues regarding React 19
+        - (npm throws an error, yarn throws a warning, bun simply works)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Establish basic Bun commands
+    - bun add === npm install
+    - bunx === npx
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Create Next.js project
+    - use exact version
+    - add shadcn/ui
+    - get familiar with the structure
+
+- Add usefull VSCode extensions
+
+## 02 Basic layout
+![alt text](image.png)
+
+- Add logo asset
+- Learn basic app router folders
+- Sidebar components
+    - Sidebar sections
+    - Sidebar items
+- Navbar
+    - Search input
+    - Sign in component
+
+## 03 Authentication
+![alt text](image-1.png)![alt text](image-2.png)
+
+- Integrate Clerk
+- Add Sign in screens
+- Add UserButton
+- Add middleware
+- Use auth state on sidebar sections
+- Protect routers
+
+## 04 Database setup
+
+- Create a PostgreSQL database (www.neon.tech)
+- Setup DrizzleORM
+- Create users schema
+- Migrate changes to database
+- Learn how to use drizzle-kit
+
+- Why DrizzleORM?
+    - Only ORM with both relational and SQL-like query APIs
+    - Serverless by default
+    - Forcing up to "understand" our queries
+
+```bash
+cosnt result = await db.query.users.findMany({
+    with: {  // prisma-like querying
+    posts: true
+    },
+});
+```
+```bash
+await db // sql-like querying
+    .select()  
+    .from(countries)
+    .laftJoin(cities, eq(cities.countryId, countries.id))
+    .where(eq(contires.id, 10))
+```
+
+## 05 Webhook sync
+
+- Create ngrok account (or any other local tunnel solution)
+- Obtain a static domain (not required, but easier development)
+- Add script to concurrently run local tunnel & app
+- Create the users webhook
+- Connect the webhook on Clerk dashboard
+
+## 06 tRPC setup
+
+Why tRPC?
+- end-to-end typesafety
+- Familiar hooks (useQuery, useMutation etc.)
+- v11 allows us to do authenticated prefetching
+
+## 07 tRPC configuration
+
+- Enable transformer on tRPC
+- Add auth to tRPC context
+- Add protectedProcedure
+- Add rate limiting
+
+## 08 Video Categories
+
+- Create categories schema
+- Push changes to the database
+- Seed categories
+- Prefetch categories
+- Create categories components
+
+## 09 Studio layout
+![alt text](image-3.png)
+- Create studio route group
+- Create studio layout
+- Protect studio routes
