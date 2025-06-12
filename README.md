@@ -48,7 +48,7 @@ To learn more about this project, take a look at the following resources:
 - Add usefull VSCode extensions
 
 ## 02 Basic layout
-![alt text](image.png)
+![alt text](./public/image.png)
 
 - Add logo asset
 - Learn basic app router folders
@@ -60,7 +60,7 @@ To learn more about this project, take a look at the following resources:
     - Sign in component
 
 ## 03 Authentication
-![alt text](image-1.png)![alt text](image-2.png)
+![alt text](./public/image-1.png)![alt text](./public/image-2.png)
 
 - Integrate Clerk
 - Add Sign in screens
@@ -132,3 +132,90 @@ Why tRPC?
 - Create studio route group
 - Create studio layout
 - Protect studio routes
+
+## 10 Studio videos
+
+- Create videos schema
+- Push database changes
+- Create studio procedures
+- Add vidoes records creations
+
+## 11 Infinite loading
+
+- Add suspense and error boundaries
+- Create reuseable InfiniteScroll components
+- Demonstrate infinite scroll
+
+## 12 Mux integration
+![alt text](./public/image-4.png)
+
+- Create a responsive dialog
+- Create a free Mux account
+    - Credit card NOT required!
+- Get a 15-sec video with english audio
+    - https://tinyurl.com/mytube-clip
+- Create upload modal
+
+Mux free account limitations
+
+- Lenght limit (10s)
+- Video deletion after 24h
+- Mux watermark
+
+You can add a credit card, and stay within free tier for the entirety of this project. You will unlock full benefits of Mux for $0
+
+Mux pricing calculator: https://calculator.mux.com/
+
+## 13 Mux webhooks
+- Update video schema
+- Push database changes
+- Handle "video.asset.ready" events
+    - assign thumbnail
+    - assign preview
+- Handle "video.asset.errored" events
+    - update status
+- Handle "video.asset.track.ready" events
+    - delete from database
+- Handle "video.asset.track.ready" event
+    - update trackId and trackStatus
+
+## 14 Video form
+![alt text](./public/image-5.png)
+
+- Add skeleton to videos-section
+- Create video form page
+- Create video player
+- Add ability to update video information
+    - (Title, Description, Category, Visibility)
+
+## 15 Video thumbnails
+![alt text](./public/image-6.png)
+
+- Integrate uploadThink
+- Add thumbnail upload functionality
+- Add thumbnail restore functionality
+- Refactor thumbnail field in the schema
+    - Proper UploadThink cleanup
+
+## 16 AI background jobs
+
+Why background jobs?
+- avoid timeout from long-running tasks
+    - problematic with AI generations
+- Ensure retries in case of failure
+
+- Integrate Upstash workflow
+- Trigger a background job
+- Setup OpenAI SDK
+    - Credit card required (No free trial, no free credits)
+- Add background jobs
+    - Generate title
+    - Generate description
+    - Generate thumbnail
+
+## 17 AI thumbnails
+![alt text](./public/image-7.png)
+
+- Create thumbnail prompt modal
+- Create thumbnail generation workflow
+- Add skeleton to form-section loading state
