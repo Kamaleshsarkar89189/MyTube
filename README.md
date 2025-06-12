@@ -128,7 +128,7 @@ Why tRPC?
 - Create categories components
 
 ## 09 Studio layout
-![alt text](image-3.png)
+![alt text](./public/image-3.png)
 - Create studio route group
 - Create studio layout
 - Protect studio routes
