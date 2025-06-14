@@ -420,4 +420,20 @@ Why background jobs?
 - Create a workflow in your root directory ( .github/workflows)
 - Create a .yml file
 
+## Containerization
+
+- Dockerize your application
+- Create a Dockerfile, .dockerignore and compose.yaml file
+- There is a easy way to do this -
+    - Make sure you have Docker installed
+
+```bash
+
+    docker init
+    docker compose up --build 
+
+    // to push into dockerhub 
+    docker tag iamge_name docker_username/repo_name:latest
+    docker push docker_username/repo_name:latest
+```
 And your project is ready. Enjoy it!
