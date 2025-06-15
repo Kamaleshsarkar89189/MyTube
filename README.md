@@ -433,7 +433,7 @@ Why background jobs?
     docker compose up --build 
 
     // to push into dockerhub 
-    docker tag iamge_name docker_username/repo_name:latest
+    docker tag image_name docker_username/repo_name:latest
     docker push docker_username/repo_name:latest
 ```
 And your project is ready. Enjoy it!
