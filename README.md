@@ -407,7 +407,7 @@ Why background jobs?
 - Create a Modal to ensure the deletion permission
 
 
-## 42 Deplyment
+## 42 Deployment
 
 - Fix build errors
 - Deploy to Vercel (https://www.vercel.com)
