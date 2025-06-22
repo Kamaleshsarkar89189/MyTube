@@ -83,7 +83,7 @@ To learn more about this project, take a look at the following resources:
     - Forcing up to "understand" our queries
 
 ```bash
-cosnt result = await db.query.users.findMany({
+const result = await db.query.users.findMany({
     with: {  // prisma-like querying
     posts: true
     },
