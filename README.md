@@ -237,7 +237,7 @@ Why background jobs?
 - Create video views creation procedure
 - Trigger video view creation on video play
 
-## 20 Video reactioons
+## 20 Video reactions
 
 - Create video reactions schema
 - Create video reactions for "getOne" videos procedure
