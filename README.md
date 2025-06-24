@@ -191,11 +191,11 @@ Mux pricing calculator: https://calculator.mux.com/
 ## 15 Video thumbnails
 ![alt text](./public/image-6.png)
 
-- Integrate uploadThink
+- Integrate uploadthing
 - Add thumbnail upload functionality
 - Add thumbnail restore functionality
 - Refactor thumbnail field in the schema
-    - Proper UploadThink cleanup
+    - Proper Uploadthing cleanup
 
 ## 16 AI background jobs
 
