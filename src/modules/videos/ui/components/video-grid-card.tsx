@@ -29,6 +29,7 @@ export const VideoGridCard = ({
                     previewUrl={data.previewUrl}
                     title={data.title}
                     duration={data.duration}
+                    playbackId={data.muxPlaybackId}
                 />
             </Link>
             <VideoInfo data={data} onRemove={onRemove}/>

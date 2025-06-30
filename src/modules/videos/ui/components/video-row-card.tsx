@@ -110,6 +110,7 @@ export const VideoRowCard = ({
                     previewUrl={data.previewUrl}
                     title={data.title}
                     duration={data.duration}
+                    playbackId={data.muxPlaybackId}
                 />
             </Link>
             {/* Info */}

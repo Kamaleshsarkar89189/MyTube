@@ -8,6 +8,7 @@ interface VideoThumbnailProps {
     duration: number;
     imageUrl?: string | null;
     previewUrl?: string | null;
+    playbackId?: string | null;
 }
 
 export const VideoThumbnailSkeleton = () => {
@@ -23,6 +24,7 @@ export const VideoThumbnail = ({
     imageUrl,
     previewUrl,
     duration,
+    playbackId,
 }: VideoThumbnailProps) => {
     return (
         <div className="relative group">
@@ -45,9 +47,11 @@ export const VideoThumbnail = ({
             </div>
 
             {/* Video duration box */}
-            <div className="absolute bottom-2 right-2 px-1 py-0.5 rounded bg-black/80 text-white text-xs font-medium">
-                {formatDuration(duration)}
-            </div>
+            {playbackId && (
+                <div className="absolute bottom-2 right-2 px-1 py-0.5 rounded bg-black/80 text-white text-xs font-medium">
+                    {formatDuration(duration)}
+                </div>
+            )}
         </div>
     )
 }
