@@ -480,6 +480,7 @@ export const videosRouter = createTRPCRouter({
                 .set({
                     title: input.title,
                     description: input.description,
+                    videoUrl: input.videoUrl,
                     categoryId: input.categoryId,
                     visibility: input.visibility,
                     updatedAt: new Date(),

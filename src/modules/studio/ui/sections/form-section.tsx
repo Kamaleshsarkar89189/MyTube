@@ -329,6 +329,26 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                     </FormItem>
                                 )}
                             />
+                            {/* Video url field here */}
+                            <FormField
+                                control={form.control}
+                                name="videoUrl"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Video URL</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                {...field}
+                                                value={field.value ?? ""} // ✅ Prevent null value error
+                                                placeholder="Enter video URL (e.g., https://cdn.site.com/video.mp4)"
+                                                type="url"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
                             {/* Add thumbnail field here */}
                             <FormField
                                 name="thumbnailUrl"

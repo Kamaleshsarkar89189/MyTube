@@ -3,10 +3,11 @@ import { VideoGetOneOutput } from "../../types";
 
 interface VideoBannerProps {
     status: VideoGetOneOutput["muxStatus"];
+    videoUrl?: string | null;
 };
 
-export const VideoBanner = ({ status }: VideoBannerProps) => {
-    if (status === "ready") return null;
+export const VideoBanner = ({ status, videoUrl }: VideoBannerProps) => {
+    if (status === "ready" || !!videoUrl) return null;
 
     return (
         <div className="bg-yellow-500 py-3 px-4 rounded-b-xl flex items-center gap-2">

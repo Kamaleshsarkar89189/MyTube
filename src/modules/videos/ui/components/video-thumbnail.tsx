@@ -1,6 +1,6 @@
 import { formatDuration } from "@/lib/utils";
 import Image from "next/image"
-import { THUMBNAIL_FALLBACK } from "../../constants";
+import { THUMBNAIL_FALLBACK, THUMBNAIL_FALLBACK_PIC } from "../../constants";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface VideoThumbnailProps {
@@ -36,7 +36,7 @@ export const VideoThumbnail = ({
                 />
                 <Image
                     unoptimized={!!previewUrl}
-                    src={previewUrl || THUMBNAIL_FALLBACK}
+                    src={previewUrl || THUMBNAIL_FALLBACK_PIC}
                     alt={title}
                     fill
                     className="h-full w-full object-cover opacity-0

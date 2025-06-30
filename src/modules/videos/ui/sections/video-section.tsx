@@ -58,11 +58,12 @@ const VideoSectionSuspense = ({ videoId }: VideoSectionProps) => {
                     <VideoPlayer
                         autoPlay
                         onPlay={handlePlay}
+                        videoUrl={video.videoUrl}
                         playbackId={video.muxPlaybackId}
                         thumbnailUrl={video.thumbnailUrl}
                     />
                 </div>
-                <VideoBanner status={video.muxStatus} />
+                <VideoBanner status={video.muxStatus} videoUrl={video.videoUrl} />
                 <VideoTopRow video={video} />
             </div>
         </>
