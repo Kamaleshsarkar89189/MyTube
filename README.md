@@ -83,7 +83,7 @@ To learn more about this project, take a look at the following resources:
     - Forcing up to "understand" our queries
 
 ```bash
-cosnt result = await db.query.users.findMany({
+const result = await db.query.users.findMany({
     with: {  // prisma-like querying
     posts: true
     },
@@ -191,11 +191,11 @@ Mux pricing calculator: https://calculator.mux.com/
 ## 15 Video thumbnails
 ![alt text](./public/image-6.png)
 
-- Integrate uploadThink
+- Integrate uploadthing
 - Add thumbnail upload functionality
 - Add thumbnail restore functionality
 - Refactor thumbnail field in the schema
-    - Proper UploadThink cleanup
+    - Proper Uploadthing cleanup
 
 ## 16 AI background jobs
 
@@ -237,7 +237,7 @@ Why background jobs?
 - Create video views creation procedure
 - Trigger video view creation on video play
 
-## 20 Video reactioons
+## 20 Video reactions
 
 - Create video reactions schema
 - Create video reactions for "getOne" videos procedure
@@ -407,7 +407,7 @@ Why background jobs?
 - Create a Modal to ensure the deletion permission
 
 
-## 42 Deplyment
+## 42 Deployment
 
 - Fix build errors
 - Deploy to Vercel (https://www.vercel.com)
