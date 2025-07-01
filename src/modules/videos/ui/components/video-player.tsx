@@ -40,9 +40,11 @@ export const VideoPlayer = ({
             <video
                 src={videoUrl}
                 controls
+                controlsList="nodownload"
                 autoPlay={autoPlay}
                 poster={thumbnailUrl ?? THUMBNAIL_FALLBACK}
                 onPlay={onPlay}
+                onContextMenu={(e) => e.preventDefault()}
                 className="w-full h-full rounded-xl object-contain"
             />
         );
