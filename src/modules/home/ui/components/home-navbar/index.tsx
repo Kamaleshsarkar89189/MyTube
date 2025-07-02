@@ -13,10 +13,12 @@ import { Loader2Icon, PlusIcon } from "lucide-react";
 import { ResponsiveModal } from "@/components/responsive-modal";
 import { StudioUploader } from "@/modules/studio/ui/components/studio-uploader";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { useUser } from "@clerk/nextjs";
 
 export const HomeNavbar = () => {
 
     const router = useRouter();
+    const { user, isLoaded } = useUser();
     const utils = trpc.useUtils();
     const create = trpc.videos.create.useMutation({
         onSuccess: () => {
@@ -62,13 +64,17 @@ export const HomeNavbar = () => {
                         : <Loader2Icon />
                     }
                 </ResponsiveModal>
-                <Button variant="secondary"
-                    onClick={() => create.mutate()}
-                    disabled={create.isPending}
-                    className="hidden md:flex items-center gap-2">
-                    {create.isPending ? <Loader2Icon className="animate-spin" /> : <PlusIcon />}
-                    Create
-                </Button>
+                {isLoaded && user && (
+                    <Button
+                        variant="secondary"
+                        onClick={() => create.mutate()}
+                        disabled={create.isPending}
+                        className="hidden md:flex items-center gap-2"
+                    >
+                        {create.isPending ? <Loader2Icon className="animate-spin" /> : <PlusIcon />}
+                        Create
+                    </Button>
+                )}
                 <div className="flex-shrink-0 items-center flex gap-4">
                     <ThemeToggle />
                     <AuthButton />
