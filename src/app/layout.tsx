@@ -5,7 +5,6 @@ import "./globals.css";
 import { TRPCProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import MonetagSWRegister from "@/components/monetag-sw-register";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +21,6 @@ export default function RootLayout({
   return (
     <ThemeProvider>
       <ClerkProvider>
-        <MonetagSWRegister />
         <html lang="en">
           <body
             className={inter.className}>
