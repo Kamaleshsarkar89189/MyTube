@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2Icon, PlusIcon } from "lucide-react";
 import { ResponsiveModal } from "@/components/responsive-modal";
 import { StudioUploader } from "@/modules/studio/ui/components/studio-uploader";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export const HomeNavbar = () => {
 
@@ -69,7 +70,7 @@ export const HomeNavbar = () => {
                     Create
                 </Button>
                 <div className="flex-shrink-0 items-center flex gap-4">
-                    {/* <ThemeToggle /> */}
+                    <ThemeToggle />
                     <AuthButton />
                 </div>
             </div>
