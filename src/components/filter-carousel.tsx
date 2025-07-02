@@ -51,7 +51,7 @@ export const FilterCarousel = ({
         <div className="relative w-full">
             {/* Left fade */}
             <div className={cn(
-                "absolute left-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-muted to-transparent pointer-events-none",
+                "absolute left-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-muted to-transparent pointer-events-none",
                 current === 1 && "hidden"
             )}/>
             <Carousel
@@ -60,7 +60,7 @@ export const FilterCarousel = ({
                     align: "start",
                     dragFree: true,
                 }}
-                className="w-full px-12"
+                className="w-full px-0"
             >
                 <CarouselContent className="-ml-3">
                     {!isLoading && (
@@ -101,12 +101,12 @@ export const FilterCarousel = ({
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                 <CarouselPrevious className="left-0 z-20"/>
-                <CarouselNext className="right-0 z-20"/> 
+                 {/* <CarouselPrevious className="left-0 z-20"/>
+                <CarouselNext className="right-0 z-20"/>  */}
             </Carousel>
             {/* Right fade */}
             <div className={cn(
-                "absolute right-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-muted to-transparent pointer-events-none",
+                "absolute right-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-muted to-transparent pointer-events-none",
                 current === count && "hidden"
             )} />
 
