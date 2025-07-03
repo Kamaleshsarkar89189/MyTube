@@ -24,8 +24,7 @@ export const HomeVideosSection = (props: HomeVideosSectionProps) => {
 const HomeVideosSectionSkeleton = () => {
     return (
         <div
-            className="gap-4 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 
-             [@media(min-width:1920px)]:grid-cols-5 [@media(min-width:2200px)]:grid-cols-6"
+            className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 [@media(min-width:2200px)]:grid-cols-8 gap-4"
         >
             {Array.from({ length: 18 }).map((_, index) => (
                 <VideoGridCardSkeleton key={index} />
@@ -45,8 +44,7 @@ const HomeVideosSectionSuspense = ({ categoryId }: HomeVideosSectionProps) => {
     return (
         <div>
             <div
-                className="gap-4 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 
-            [@media(min-width:1920px)]:grid-cols-5 [@media(min-width:2200px)]:grid-cols-6 "
+                className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 [@media(min-width:2200px)]:grid-cols-8 gap-4"
             >
                 {videos.pages
                     .flatMap((page) => page.items)

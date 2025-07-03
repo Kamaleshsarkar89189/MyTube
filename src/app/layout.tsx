@@ -5,8 +5,8 @@ import "./globals.css";
 import { TRPCProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import PopunderAd from "@/components/PopunderAd";
-import PushNotificationAd from "@/components/PushNotificationAd";
+// import PopunderAd from "@/components/PopunderAd";
+// import PushNotificationAd from "@/components/PushNotificationAd";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,8 +28,8 @@ export default function RootLayout({
             className={inter.className}>
             <TRPCProvider>
               <Toaster />
-              <PopunderAd />
-              <PushNotificationAd />
+              {/* <PopunderAd />
+              <PushNotificationAd /> */}
               {children}
             </TRPCProvider>
           </body>
