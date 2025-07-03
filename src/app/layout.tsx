@@ -6,6 +6,7 @@ import { TRPCProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import PopunderAd from "@/components/PopunderAd";
+import PushNotificationAd from "@/components/PushNotificationAd";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
             <TRPCProvider>
               <Toaster />
               <PopunderAd />
+              <PushNotificationAd />
               {children}
             </TRPCProvider>
           </body>
