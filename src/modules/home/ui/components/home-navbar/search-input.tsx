@@ -51,7 +51,7 @@ export const SearchInputSuspense = () => {
                     onChange={(e) => setValue(e.target.value)}
                     type="text"
                     placeholder="Search"
-                    className="w-full pl-4 py-2 pr-12 bg-muted rounded-l-full border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500"
+                    className="w-full pl-4 py-2 pr-12 bg-background rounded-l-full border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500"
                 />
                 {value && (
                     <Button
