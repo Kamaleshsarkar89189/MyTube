@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import PushNotificationAd from "@/components/PushNotificationAd";
 import PopunderAd from "@/components/PopunderAd";
+import { InPagePushAd } from "@/components/InPagePushAd";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
             className={inter.className}>
             <TRPCProvider>
               <Toaster />
+              <InPagePushAd/>
               <PopunderAd />
               <PushNotificationAd />
               {children}
