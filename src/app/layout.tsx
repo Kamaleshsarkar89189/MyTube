@@ -5,8 +5,8 @@ import "./globals.css";
 import { TRPCProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import PopunderAd from "@/components/PopunderAd";
 import PushNotificationAd from "@/components/PushNotificationAd";
+import PopunderAd from "@/components/PopunderAd";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -1,11 +1,14 @@
-import { useMemo } from "react";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { format, formatDistanceToNow } from "date-fns";
+import { LucideShare2 } from "lucide-react";
+import { useMemo, useState } from "react";
 import { VideoGetOneOutput } from "../../types";
+import { ShareModal } from "./share-modal";
 import { VideoDescription } from "./video-description";
 import VideoMenu from "./video-menu";
 import { VideoOwner } from "./video-owner";
 import VideoReactions from "./video-reactions";
-import { format, formatDistanceToNow } from "date-fns";
-import { Skeleton } from "@/components/ui/skeleton";
 
 
 interface VideoTopRowProps {
@@ -32,22 +35,31 @@ export const VideoTopRowSkeleton = () => {
                         <Skeleton className="h-5 w-3/5 md:w-1/5" />
                     </div>
                 </div>
-                <Skeleton className="h-9 w-2/6 md:1/6 rounded-full"/>
+                <Skeleton className="h-9 w-2/6 md:1/6 rounded-full" />
             </div>
-            <div className="h-[120px] w-full"/>
+            <div className="h-[120px] w-full" />
         </div>
     );
 };
 
 
 export const VideoTopRow = ({ video }: VideoTopRowProps) => {
+    const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+    const [hasClickedAd, setHasClickedAd] = useState(false);
+
+    const handleAdClick = () => {
+        // Open Monetag link in a new tab
+        window.open("https://otieu.com/4/9519564", "_blank");
+        setHasClickedAd(true); // Next click shows download
+      };
+
     const comapactViews = useMemo(() => {
-        return Intl.NumberFormat("en",{
+        return Intl.NumberFormat("en", {
             notation: "compact"
         }).format(video.viewCount);
     }, [video.viewCount]);
     const expandedViews = useMemo(() => {
-        return Intl.NumberFormat("en",{
+        return Intl.NumberFormat("en", {
             notation: "standard"
         }).format(video.viewCount);
     }, [video.viewCount]);
@@ -64,22 +76,58 @@ export const VideoTopRow = ({ video }: VideoTopRowProps) => {
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                 <VideoOwner user={video.user} videoId={video.id} />
                 <div className="flex overflow-x-auto sm:min-w-[calc(50%-6px)] sm:justify-end sm:overflow-visible pb-2 -mb-2 sm:pb-0 sm:mb-0 gap-2">
-                    <VideoReactions 
-                     videoId={video.id}
-                     likes={video.likeCount}
-                     dislikes={video.dislikeCount}
-                     viewerReaction={video.viewerReaction}
+                    {!hasClickedAd ? (
+                        <Button
+                            onClick={handleAdClick}
+                            className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-black dark:text-white text-sm font-medium px-4 py-2 rounded-md transition"
+                        >
+                            Download
+                        </Button>
+                    ) : (
+                        <Button
+                            asChild
+                            className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-black dark:text-white text-sm font-medium px-4 py-2 rounded-md transition"
+                        >
+                            <a
+                                href={video.videoUrl ?? ""}
+                                download
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Download
+                            </a>
+                        </Button>
+                    )}
+
+                    <VideoReactions
+                        videoId={video.id}
+                        likes={video.likeCount}
+                        dislikes={video.dislikeCount}
+                        viewerReaction={video.viewerReaction}
+                    />
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsShareModalOpen(true)}
+                        className="rounded-full hover:bg-muted transition"
+                    >
+                        <LucideShare2 className="w-5 h-5" />
+                    </Button>
+                    <ShareModal
+                        open={isShareModalOpen}
+                        onOpenChange={setIsShareModalOpen}
+                        videoUrl={typeof window !== "undefined" ? window.location.href : ""}
                     />
                     <VideoMenu videoId={video.id} variant="secondary" />
                 </div>
             </div>
             <VideoDescription
-            compactViews={comapactViews}
-            expandeViews={expandedViews}
-            compactDate={compactDate}
-            expandedDate={expandedDate}
-            description={video.description}
-             />
+                compactViews={comapactViews}
+                expandeViews={expandedViews}
+                compactDate={compactDate}
+                expandedDate={expandedDate}
+                description={video.description}
+            />
         </div>
     )
 }
