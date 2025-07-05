@@ -8,6 +8,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import PushNotificationAd from "@/components/PushNotificationAd";
 import PopunderAd from "@/components/PopunderAd";
 import { InPagePushAd } from "@/components/InPagePushAd";
+import { IndustrialAd } from "@/components/IndustrialAd";
+import { VintageAd } from "@/components/VintageAd";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +34,8 @@ export default function RootLayout({
             className={inter.className}>
             <TRPCProvider>
               <Toaster />
+              <VintageAd/>
+              <IndustrialAd/>
               <InPagePushAd/>
               <PopunderAd />
               <PushNotificationAd />
