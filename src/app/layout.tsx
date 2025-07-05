@@ -14,6 +14,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "MovieHub",
   description: "MovieHub is your ultimate destination for discovering, streaming, and enjoying movies. Explore a wide range of genres, watch trailers, stay updated with the latest releases, and dive into the world of cinema — all in one place.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
