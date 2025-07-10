@@ -9,6 +9,7 @@ import { VideoDescription } from "./video-description";
 import VideoMenu from "./video-menu";
 import { VideoOwner } from "./video-owner";
 import VideoReactions from "./video-reactions";
+import { DownloadModalButton } from "@/modules/movie/ui/components/download-modal-button";
 
 
 interface VideoTopRowProps {
@@ -51,7 +52,7 @@ export const VideoTopRow = ({ video }: VideoTopRowProps) => {
         // Open Monetag link in a new tab
         window.open("https://otieu.com/4/9519564", "_blank");
         setHasClickedAd(true); // Next click shows download
-      };
+    };
 
     const comapactViews = useMemo(() => {
         return Intl.NumberFormat("en", {
@@ -79,24 +80,46 @@ export const VideoTopRow = ({ video }: VideoTopRowProps) => {
                     {!hasClickedAd ? (
                         <Button
                             onClick={handleAdClick}
-                            className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-black dark:text-white text-sm font-medium px-4 py-2 rounded-md transition"
+                            className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-md transition"
                         >
-                            Download
+                            ⚡ Click to Download ⚡
                         </Button>
                     ) : (
-                        <Button
-                            asChild
-                            className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-black dark:text-white text-sm font-medium px-4 py-2 rounded-md transition"
-                        >
-                            <a
-                                href={video.videoUrl ?? ""}
-                                download
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Download
-                            </a>
-                        </Button>
+                        // <Button
+                        //     asChild
+                        //         className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-md transition"
+                        // >
+                        //     <a
+                        //             href={`/api/download?url=${encodeURIComponent(video.videoUrl ?? "")}&title=${encodeURIComponent(video.title ?? "video")}`}
+                        //         target="_blank"
+                        //         rel="noopener noreferrer"
+                        //     >
+                        //         Download
+                        //     </a>
+                        // </Button>
+                            <DownloadModalButton
+                                downloadOptions={[
+                                    {
+                                        quality: "1080p",
+                                        size: video.downloadUrlTwoSize ?? "",
+                                        url: video.downloadUrlTwo ?? "", 
+                                        title: video.title,
+                                    },
+                                    {
+                                        quality: "720p",
+                                        size: video.downloadUrlOneSize ?? "",
+                                        url: video.downloadUrlOne ?? "",
+                                        title: video.title,
+                                    },
+                                    {
+                                        quality: "480p",
+                                        size: video.videoUrlSize ?? "",
+                                        url: video.videoUrl ?? "",
+                                        title: video.title,
+                                    },
+                                ]}
+                            />
+
                     )}
 
                     <VideoReactions

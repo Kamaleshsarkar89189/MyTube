@@ -11,8 +11,8 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { UserAvatar } from "@/components/user-avatar";
-import { UserInfo } from "@/modules/users/ui/components/user-info";
+// import { UserAvatar } from "@/components/user-avatar";
+// import { UserInfo } from "@/modules/users/ui/components/user-info";
 
 import { VideoThumbnail, VideoThumbnailSkeleton } from "./video-thumbnail";
 import { VideoGetManyOutput } from "../../types";
@@ -134,12 +134,12 @@ export const VideoRowCard = ({
                             <>
 
                                 <div className="flex items-center gap-2 my-3">
-                                    <UserAvatar
+                                    {/* <UserAvatar
                                         size="sm"
                                         imageUrl={data.user.imageUrl}
                                         name={data.user.name}
-                                    />
-                                    <UserInfo size="sm" name={data.user.name} />
+                                    /> */}
+                                    {/* <UserInfo size="sm" name={data.user.name} /> */}
                                 </div>
                                 <Tooltip>
                                     <TooltipTrigger asChild>
@@ -158,13 +158,28 @@ export const VideoRowCard = ({
                             </>
                         )}
                         {size === "compact" && (
-                            <UserInfo size="sm" name={data.user.name} />
+                            <div className="h-0"/>
+                            // <UserInfo size="sm" name={data.user.name} />
                         )}
                         {size === "compact" && (
                             <p className="text-xs text-muted-foreground mt-1">
                                 {compactViews} views • {compactLikes} likes
                             </p>
                         )}
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <p className="text-xs text-muted-foreground w-full line-clamp-6">
+                                    {data.description ?? "No description"}
+                                </p>
+                            </TooltipTrigger>
+                            <TooltipContent
+                                side="bottom"
+                                align="center"
+                                className="bg-black/70"
+                            >
+                                <p>From the video description</p>
+                            </TooltipContent>
+                        </Tooltip>
                     </Link>
                     <div className="flex-none">
                         <VideoMenu videoId={data.id} onRemove={onRemove}/>

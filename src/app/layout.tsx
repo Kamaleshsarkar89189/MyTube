@@ -5,9 +5,9 @@ import "./globals.css";
 import { TRPCProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import PushNotificationAd from "@/components/PushNotificationAd";
-import PopunderAd from "@/components/PopunderAd";
-import { InPagePushAd } from "@/components/InPagePushAd";
+// import PushNotificationAd from "@/components/PushNotificationAd";
+// import PopunderAd from "@/components/PopunderAd";
+// import { InPagePushAd } from "@/components/InPagePushAd";
 import { IndustrialAd } from "@/components/IndustrialAd";
 import { VintageAd } from "@/components/VintageAd";
 
@@ -36,9 +36,9 @@ export default function RootLayout({
               <Toaster />
               <VintageAd/>
               <IndustrialAd/>
-              <InPagePushAd/>
+              {/* <InPagePushAd/>
               <PopunderAd />
-              <PushNotificationAd />
+              <PushNotificationAd /> */}
               {children}
             </TRPCProvider>
           </body>

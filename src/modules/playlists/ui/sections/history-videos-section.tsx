@@ -58,7 +58,8 @@ const HistoryVideosSectionSuspense = () => {
     );
     return (
             <>
-                <div className="flex flex-col gap-4 gap-y-10 md:hidden">
+                <div className="grid grid-cols-2 gap-4 gap-y-10 md:hidden">
+                {/* <div className="flex flex-col gap-4 gap-y-10 md:hidden"> */}
                     {videos.pages
                         .flatMap((page) => page.items)
                         .map((video) => (

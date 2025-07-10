@@ -1,0 +1,51 @@
+"use client";
+
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+
+interface FilterCarouselProps {
+    value?: string | null;
+    isLoading?: boolean;
+    onSelect: (value: string | null) => void;
+    data: {
+        value: string;
+        label: string;
+    }[];
+}
+
+export const TagFilterCarousel = ({
+    value,
+    onSelect,
+    data,
+    isLoading,
+}: FilterCarouselProps) => {
+    return (
+        <div className="w-full">
+            <h1 className="text-2xl font-bold text-center text-foreground mb-4">
+                Categories
+            </h1>
+            <div className="flex flex-wrap gap-2">
+                {!isLoading && (
+                    <div/>
+                )}
+                {isLoading &&
+                    Array.from({ length: 14 }).map((_, index) => (
+                        <div key={index}>
+                            <Skeleton className="rounded-lg h-7 w-[100px]" />
+                        </div>
+                    ))}
+                {!isLoading &&
+                    [...data].reverse().map((item) => (
+                        <div key={item.value} onClick={() => onSelect(item.value)}>
+                            <Badge
+                                variant={value === item.value ? "default" : "secondary"}
+                                className="rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm"
+                            >
+                                {item.label}
+                            </Badge>
+                        </div>
+                    ))}
+            </div>
+        </div>
+    );
+};

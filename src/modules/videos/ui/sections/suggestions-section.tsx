@@ -64,7 +64,7 @@ const SuggestionSectionSuspense = ({
                     />
                 )))}
             </div>
-            <div className="block md:hidden space-y-10">
+            <div className="grid grid-cols-2 gap-4 gap-y-6 px-2 md:hidden">
                 {suggestions.pages.flatMap((page) => page.items.map((video) => (
                     <VideoGridCard
                         key={video.id}

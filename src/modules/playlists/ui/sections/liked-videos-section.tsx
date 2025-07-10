@@ -57,28 +57,30 @@ const LikedVideosSectionSuspense = () => {
         }
     );
     return (
-            <>
-                <div className="flex flex-col gap-4 gap-y-10 md:hidden">
-                    {videos.pages
-                        .flatMap((page) => page.items)
-                        .map((video) => (
-                            <VideoGridCard key={video.id} data={video} />
-                        ))}
-                </div>
-                <div
-                    className="hidden flex-col gap-4 md:flex">
-                    {videos.pages
-                        .flatMap((page) => page.items)
-                        .map((video) => (
-                            <VideoRowCard key={video.id} data={video} size="compact" />
-                        ))}
-                </div>
-                <InfiniteScroll
-                    hasNextPage={query.hasNextPage}
-                    isFetchingNextPage={query.isFetchingNextPage}
-                    fetchNextPage={query.fetchNextPage}
-                />
-            </>
+        <>
+        {/* For movie grid */}
+            <div className="grid grid-cols-2 gap-4 gap-y-10 md:hidden">
+                {/* <div className="flex flex-col gap-4 gap-y-10 md:hidden"> */}
+                {videos.pages
+                    .flatMap((page) => page.items)
+                    .map((video) => (
+                        <VideoGridCard key={video.id} data={video} />
+                    ))}
+            </div>
+            <div
+                className="hidden flex-col gap-4 md:flex">
+                {videos.pages
+                    .flatMap((page) => page.items)
+                    .map((video) => (
+                        <VideoRowCard key={video.id} data={video} size="compact" />
+                    ))}
+            </div>
+            <InfiniteScroll
+                hasNextPage={query.hasNextPage}
+                isFetchingNextPage={query.isFetchingNextPage}
+                fetchNextPage={query.fetchNextPage}
+            />
+        </>
 
     )
 }
