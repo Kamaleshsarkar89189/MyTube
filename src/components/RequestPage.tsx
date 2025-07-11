@@ -19,16 +19,34 @@ export const RequestPage = () => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
         if (form.name && form.email && form.request) {
-            setSubmitted(true);
-            setTimeout(() => {
-                setForm({ name: "", email: "", request: "" });
-                setSubmitted(false);
-            }, 4000);
+            try {
+                const res = await fetch("/api/send-request", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(form),
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    setSubmitted(true);
+                    setTimeout(() => {
+                        setForm({ name: "", email: "", request: "" });
+                        setSubmitted(false);
+                    }, 4000);
+                } else {
+                    alert("Something went wrong. Please try again.");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Email sending failed.");
+            }
         }
-    };
+    };    
 
     return (
         <section className="max-w-3xl mx-auto px-4 py-12 text-foreground">

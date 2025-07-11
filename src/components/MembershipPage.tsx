@@ -23,16 +23,34 @@ export const MembershipPage = () => {
         setForm({ ...form, rating: value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
         if (form.name && form.email && form.contact && form.rating > 0) {
-            setSubmitted(true);
-            setTimeout(() => {
-                setForm({ name: "", email: "", contact: "", rating: 0 });
-                setSubmitted(false);
-            }, 4000);
+            try {
+                const res = await fetch("/api/send-membership", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(form),
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    setSubmitted(true);
+                    setTimeout(() => {
+                        setForm({ name: "", email: "", contact: "", rating: 0 });
+                        setSubmitted(false);
+                    }, 4000);
+                } else {
+                    alert("Something went wrong. Try again.");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Failed to send email.");
+            }
         }
-    };
+    };      
 
     return (
         <section className="max-w-3xl mx-auto px-4 py-10 text-foreground">
