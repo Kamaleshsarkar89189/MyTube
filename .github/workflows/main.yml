@@ -16,6 +16,7 @@ jobs:
       MUX_TOKEN_ID: ${{ secrets.MUX_TOKEN_ID }}
       MUX_TOKEN_SECRET: ${{ secrets.MUX_TOKEN_SECRET }}
       QSTASH_TOKEN: ${{ secrets.QSTASH_TOKEN }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
       
 
     steps:
