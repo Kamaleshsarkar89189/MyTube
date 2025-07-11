@@ -67,7 +67,8 @@ export const UserPageInfo = ({ user }: UserPageInfoProps) => {
                     />
                     <div className="flex-1 min-w-0">
                         <h1 className="text-xl font-bold">
-                            <h1>MovieHub Team</h1>
+                            {userId === user.clerkId ? user.name : "MovieHub Team"}
+                            {/* <h1>MovieHub Team</h1> */}
                             {/* {user.name} */}
                         </h1>
                         <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
@@ -112,8 +113,7 @@ export const UserPageInfo = ({ user }: UserPageInfoProps) => {
                 />
                 <div className="flex-1 min-w-0">
                     <h1 className="text-4xl font-bold">
-                        <h1>MovieHub Team</h1>
-                        {/* {user.name} */}
+                        {userId === user.clerkId ? user.name : "MovieHub Team"}
                     </h1>
                     <div className="flex items-center gap-1 text-sm text-muted-foreground mt-3">
                         <span>{user.subscriberCount} subscribers</span>
