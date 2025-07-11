@@ -1,20 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { trpc } from "@/trpc/client"
-import { Suspense, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Textarea } from "@/components/ui/textarea";
-import { ErrorBoundary } from "react-error-boundary";
-import { CopyCheckIcon, CopyIcon, Globe2Icon, ImagePlusIcon, Loader2Icon, LockIcon, MoreVerticalIcon, RotateCcwIcon, SparklesIcon, TrashIcon } from "lucide-react";
-import { z } from "zod";
-import { videoUpdateSchema } from "@/db/schema";
-import { toast } from "sonner";
-import { VideoPlayer } from "@/modules/videos/ui/components/video-player";
-import Link from "next/link";
-import { snakeCaseToTitle } from "@/lib/utils";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -25,27 +12,38 @@ import {
     Form,
     FormControl,
     FormField,
+    FormItem,
     FormLabel,
     FormMessage,
-    FormItem,
-
-} from "@/components/ui/form"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select"
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { THUMBNAIL_FALLBACK } from "@/modules/videos/constants";
-import { ThumbnailUploadModal } from "../components/thumbnail-upload-modal";
-import { ThumbnailGenerateModal } from "../components/thumbnail-generate-modal";
+} from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Textarea } from "@/components/ui/textarea";
 import { APP_URL } from "@/constants";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { useAuth } from "@clerk/nextjs";
+import { videoUpdateSchema } from "@/db/schema";
+import { snakeCaseToTitle } from "@/lib/utils";
+import { THUMBNAIL_FALLBACK } from "@/modules/videos/constants";
+import { VideoPlayer } from "@/modules/videos/ui/components/video-player";
+import { trpc } from "@/trpc/client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CopyCheckIcon, CopyIcon, Globe2Icon, ImagePlusIcon, Loader2Icon, LockIcon, MoreVerticalIcon, RotateCcwIcon, SparklesIcon, TrashIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+import { ThumbnailGenerateModal } from "../components/thumbnail-generate-modal";
+import { ThumbnailUploadModal } from "../components/thumbnail-upload-modal";
 interface FormSectionProps {
     videoId: string;
 }
