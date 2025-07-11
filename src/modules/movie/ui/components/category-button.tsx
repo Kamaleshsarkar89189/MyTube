@@ -9,22 +9,22 @@ const categories: Category[] = [
     {
         label: "Bollywood Movies",
         colorClass: "bg-green-600",
-        link: "https://kamalesh-sarkar.vercel.app/", // TODO: Add specific link
+        link: "mv-hub.netlify.app/?categoryId=c4459e46-d2c9-4c6c-a878-922b3db79662", // TODO: Add specific link
     },
     {
         label: "Hindi Dubbed Anime",
         colorClass: "bg-red-600",
-        link: "/category/dual-audio",// TODO: Add specific link
+        link: "mv-hub.netlify.app/?categoryId=8df947ff-1bd5-4f78-b075-d7a48ac98b25",// TODO: Add specific link
     },
     {
         label: "Hollywood Movies",
         colorClass: "bg-yellow-600",
-        link: "/category/hollywood",
+        link: "mv-hub.netlify.app/?categoryId=6ef6af5b-ba7c-42d2-a7fa-ae5daa8a755e",
     },
     {
         label: "Join Our Telegram",
         colorClass: "bg-sky-500",
-        link: "https://t.me/your_telegram_channel",// TODO: Add specific link
+        link: "https://t.me/AnimeEmperorhindi",
       },
 ];
 
