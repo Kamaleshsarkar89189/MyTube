@@ -121,9 +121,6 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     const router = useRouter();
     const utils = trpc.useUtils();
 
-    const { userId, isLoaded } = useAuth();
-    const isSpecialUser = isLoaded && userId === "9efb25ba-cf2c-40a0-8702-24b3de986b4c";
-    
     const [thumbnailModalOpen, setThumbnailModalOpen] = useState(false)
     const [thumbnailGenerateModalOpen, setThumbnailGenerateModalOpen] = useState(false)
 
@@ -334,132 +331,111 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                 )}
                             />
                             {/* Video url field here */}
-                            {isLoaded && isSpecialUser && (
-                                <>
-                                    <FormField
-                                        control={form.control}
-                                        name="videoUrl"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>
-                                                    <div className="flex items-center gap-4">
-                                                        <span>Video URL (480p)</span>
-                                                        <FormField
-                                                            control={form.control}
-                                                            name="videoUrlSize"
-                                                            render={({ field }) => (
-                                                                <Input
-                                                                    {...field}
-                                                                    value={field.value ?? ""} // prevent null error
-                                                                    placeholder="Size (e.g., 80MB)"
-                                                                    className="h-8 w-36 text-xs"
-                                                                    type="text"
-                                                                />
-                                                            )}
+                            <FormField
+                                control={form.control}
+                                name="videoUrl"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            <div className="flex items-center gap-4">
+                                                <span>Video URL (480p)</span>
+                                                <FormField
+                                                    control={form.control}
+                                                    name="videoUrlSize"
+                                                    render={({ field }) => (
+                                                        <Input
+                                                            {...field}
+                                                            value={field.value ?? ""} // prevent null error
+                                                            placeholder="Size (e.g., 80MB)"
+                                                            className="h-8 w-36 text-xs"
+                                                            type="text"
                                                         />
-                                                    </div>
-                                                </FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        {...field}
-                                                        value={field.value ?? ""}
-                                                        placeholder="Enter video URL (e.g., https://cdn.site.com/video.mp4)"
-                                                        type="url"
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="downloadUrlOne"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>
-                                                    <div className="flex items-center gap-4">
-                                                        <span>720p Download URL</span>
-                                                        <FormField
-                                                            control={form.control}
-                                                            name="downloadUrlOneSize"
-                                                            render={({ field }) => (
-                                                                <Input
-                                                                    {...field}
-                                                                    value={field.value ?? ""} // ✅ prevent null error
-                                                                    placeholder="Size (e.g., 100MB, 1GB)"
-                                                                    className="h-8 w-36 text-xs"
-                                                                    type="text"
-                                                                />
-                                                            )}
+                                                    )}
+                                                />
+                                            </div>
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                {...field}
+                                                value={field.value ?? ""}
+                                                placeholder="Enter video URL (e.g., https://cdn.site.com/video.mp4)"
+                                                type="url"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="downloadUrlOne"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            <div className="flex items-center gap-4">
+                                                <span>720p Download URL</span>
+                                                <FormField
+                                                    control={form.control}
+                                                    name="downloadUrlOneSize"
+                                                    render={({ field }) => (
+                                                        <Input
+                                                            {...field}
+                                                            value={field.value ?? ""} // ✅ prevent null error
+                                                            placeholder="Size (e.g., 100MB, 1GB)"
+                                                            className="h-8 w-36 text-xs"
+                                                            type="text"
                                                         />
-                                                    </div>
-                                                </FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        {...field}
-                                                        value={field.value ?? ""}
-                                                        placeholder="Enter video URL (e.g., https://cdn.site.com/video.mp4)"
-                                                        type="url"
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name="downloadUrlTwo"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel>
-                                                    <div className="flex items-center gap-4">
-                                                        <span>1080p Download URL</span>
-                                                        <FormField
-                                                            control={form.control}
-                                                            name="downloadUrlTwoSize"
-                                                            render={({ field }) => (
-                                                                <Input
-                                                                    {...field}
-                                                                    value={field.value ?? ""}
-                                                                    placeholder="Size (e.g., 500MB, 2.5GB)"
-                                                                    className="h-8 w-36 text-xs"
-                                                                    type="text"
-                                                                />
-                                                            )}
+                                                    )}
+                                                />
+                                            </div>
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                {...field}
+                                                value={field.value ?? ""}
+                                                placeholder="Enter video URL (e.g., https://cdn.site.com/video.mp4)"
+                                                type="url"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="downloadUrlTwo"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            <div className="flex items-center gap-4">
+                                                <span>1080p Download URL</span>
+                                                <FormField
+                                                    control={form.control}
+                                                    name="downloadUrlTwoSize"
+                                                    render={({ field }) => (
+                                                        <Input
+                                                            {...field}
+                                                            value={field.value ?? ""}
+                                                            placeholder="Size (e.g., 500MB, 2.5GB)"
+                                                            className="h-8 w-36 text-xs"
+                                                            type="text"
                                                         />
-                                                    </div>
-                                                </FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        {...field}
-                                                        value={field.value ?? ""}
-                                                        placeholder="Enter video URL (e.g., https://cdn.site.com/video.mp4)"
-                                                        type="url"
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </>
-                            )}
-                            {isLoaded && !isSpecialUser && (
-                                <div className="flex flex-col gap-3 items-start bg-muted/40 p-4 rounded-md border mt-4">
-                                    <p className="text-muted-foreground text-sm italic">
-                                        You are not authorized to upload download URLs.
-                                    </p>
-                                    <div className="mt-6">
-                                        <Link href="/membership"
-                                            className="inline-block px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300
-                                border border-yellow-500 text-yellow-500
-                                hover:bg-yellow-500 hover:text-black
-                                dark:hover:text-white dark:hover:bg-yellow-600"
-                                        >
-                                            Become a Member of our Team
-                                        </Link>
-                                    </div>
-                                </div>
-                            )}
+                                                    )}
+                                                />
+                                            </div>
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                {...field}
+                                                value={field.value ?? ""}
+                                                placeholder="Enter video URL (e.g., https://cdn.site.com/video.mp4)"
+                                                type="url"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
 
                             {/* Add thumbnail field here */}
                             <FormField
