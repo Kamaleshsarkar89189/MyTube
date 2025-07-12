@@ -114,7 +114,7 @@ export const HomeNavbar = () => {
 
             {/* Mobile Search Input (shown below nav when open) */}
             {showSearch && (
-                <div className="md:hidden mt-16 px-4 mb-4">
+                <div className="md:hidden mt-16 px-4 -mb-16">
                     <SearchInput inputRef={inputRef} />
                 </div>
             )}
