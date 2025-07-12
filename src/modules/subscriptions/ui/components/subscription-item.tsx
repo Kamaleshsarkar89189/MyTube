@@ -45,7 +45,8 @@ export const SubscriptionItem = ({
                 <div className="flex items-center justify-between">
                     <div>
                         <h3 className="text-sm">
-                            {name}
+                            {/* {name} */}
+                            MovieHub Team
                         </h3>
                         <p className="text-xs text-muted-foreground">
                             {subscriberCount.toLocaleString()} subscribers

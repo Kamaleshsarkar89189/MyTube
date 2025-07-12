@@ -11,15 +11,16 @@ import { Button } from "@/components/ui/button";
 import { Loader2Icon, PlusIcon, SearchIcon, XIcon } from "lucide-react";
 import { ResponsiveModal } from "@/components/responsive-modal";
 import { StudioUploader } from "@/modules/studio/ui/components/studio-uploader";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useUser } from "@clerk/nextjs";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const HomeNavbar = () => {
     const router = useRouter();
     const { user, isLoaded } = useUser();
     const [showSearch, setShowSearch] = useState(false);
+    const inputRef = useRef<HTMLInputElement>(null);
     const utils = trpc.useUtils();
+    const isAdmin = user?.publicMetadata?.role === "admin";
 
     const create = trpc.videos.create.useMutation({
         onSuccess: () => {
@@ -36,6 +37,16 @@ export const HomeNavbar = () => {
         create.reset();
         router.push(`/studio/videos/${create.data.video.id}`);
     }
+
+    // ✅ Scroll to top and focus input when search is opened on mobile
+    useEffect(() => {
+        if (showSearch) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setTimeout(() => {
+                inputRef.current?.focus();
+            }, 100); // Wait for scroll
+        }
+    }, [showSearch]);
 
     return (
         <>
@@ -55,7 +66,7 @@ export const HomeNavbar = () => {
                     </div>
 
                     {/* Right: Buttons */}
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-4 md:gap-53">
                         {/* Search Toggle (Button) */}
                         <Button
                             variant="ghost"
@@ -83,7 +94,7 @@ export const HomeNavbar = () => {
                             }
                         </ResponsiveModal>
 
-                        {isLoaded && user && (
+                        {isLoaded && user && isAdmin && (
                             <Button
                                 variant="secondary"
                                 onClick={() => create.mutate()}
@@ -95,7 +106,7 @@ export const HomeNavbar = () => {
                             </Button>
                         )}
 
-                        <ThemeToggle />
+                        {/* <ThemeToggle /> */}
                         {isLoaded && user && <AuthButton />}
                     </div>
                 </div>
@@ -103,8 +114,8 @@ export const HomeNavbar = () => {
 
             {/* Mobile Search Input (shown below nav when open) */}
             {showSearch && (
-                <div className="md:hidden mt-16 px-4 -mb-16">
-                    <SearchInput />
+                <div className="md:hidden mt-16 px-4 mb-4">
+                    <SearchInput inputRef={inputRef} />
                 </div>
             )}
         </>

@@ -7,14 +7,14 @@ import { SearchIcon, XIcon } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 
-export const SearchInput = () => {
+export const SearchInput = ({ }: { inputRef?: React.RefObject<HTMLInputElement | null> }) => {
     return (
         <Suspense fallback={<Skeleton className="h-10 w-full" />}>
             <SearchInputSuspense />
         </Suspense>
     )
 }
-export const SearchInputSuspense = () => {
+export const SearchInputSuspense = ({ inputRef }: { inputRef?: React.RefObject<HTMLInputElement | null> }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
@@ -49,6 +49,7 @@ export const SearchInputSuspense = () => {
                 <input
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
+                    ref={inputRef} 
                     type="text"
                     placeholder="Search"
                     className="w-full pl-4 py-2 pr-12 bg-background rounded-l-full border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-blue-500"
