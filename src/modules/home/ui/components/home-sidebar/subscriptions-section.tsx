@@ -72,7 +72,10 @@ export const SubscriptionsSection = () => {
                                             imageUrl={subscription.user.imageUrl}
                                             name={subscription.user.name}
                                         />
-                                        <span className="text-sm">{subscription.user.name}</span>
+                                        <span className="text-sm">
+                                            {/* {subscription.user.name} */}
+                                            MovieHub Team
+                                        </span>
                                     </Link>
                                 );
 
