@@ -82,7 +82,7 @@ export const SubscriptionsSection = () => {
                                 return (
                                     <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerId}`}>
                                         <SidebarMenuButton
-                                            tooltip={subscription.user.name}
+                                            tooltip="MovieHub Team"
                                             asChild
                                             isActive={pathname === `/users/${subscription.user.id}`}
                                         >
