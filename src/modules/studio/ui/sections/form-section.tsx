@@ -578,7 +578,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                             {!isAdmin && (
                                 <div className="flex flex-col gap-3 items-start bg-muted/40 p-4 rounded-md border mt-4">
                                     <p className="text-muted-foreground text-sm italic">
-                                        These fields are view-only. You must be a memeber to modify them.
+                                        These fields are view-only. You must be a member to modify them.
                                     </p>
                                     <div className="mt-6">
                                         <Link
