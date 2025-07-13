@@ -55,7 +55,7 @@ export const HomeNavbar = () => {
                 <div className="flex items-center justify-between w-full">
                     {/* Left: Sidebar + Logo */}
                     <div className="flex items-center gap-2">
-                        <SidebarTrigger />
+                        <SidebarTrigger className="hidden md:block" />
                         <Link prefetch href="/" className="">
                             <div className="p-4 flex items-center gap-1">
                                 <h1 className="text-3xl font-bold">

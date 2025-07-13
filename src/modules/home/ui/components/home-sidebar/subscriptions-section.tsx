@@ -15,8 +15,6 @@ import { DEFAULT_LIMIT } from "@/constants";
 import { UserAvatar } from "@/components/user-avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ListIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import { SheetClose } from "@/components/ui/sheet";
 
 export const LoadingSkeleton = () => {
     return (
@@ -42,15 +40,6 @@ export const SubscriptionsSection = () => {
         }
     );
 
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 568);
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => window.removeEventListener("resize", checkMobile);
-    }, []);
-
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Subscriptions</SidebarGroupLabel>
@@ -61,36 +50,28 @@ export const SubscriptionsSection = () => {
                         data?.pages
                             .flatMap((page) => page.items)
                             .map((subscription) => {
-                                const link = (
-                                    <Link
-                                        prefetch
-                                        href={`/users/${subscription.user.id}`}
-                                        className="flex items-center gap-4"
-                                    >
-                                        <UserAvatar
-                                            size="xs"
-                                            imageUrl={subscription.user.imageUrl}
-                                            name={subscription.user.name}
-                                        />
-                                        <span className="text-sm">
-                                            {/* {subscription.user.name} */}
-                                            MovieHub Team
-                                        </span>
-                                    </Link>
-                                );
-
+                                const isActive = pathname === `/users/${subscription.user.id}`;
                                 return (
-                                    <SidebarMenuItem key={`${subscription.creatorId}-${subscription.viewerId}`}>
+                                    <SidebarMenuItem
+                                        key={`${subscription.creatorId}-${subscription.viewerId}`}
+                                    >
                                         <SidebarMenuButton
                                             tooltip="MovieHub Team"
                                             asChild
-                                            isActive={pathname === `/users/${subscription.user.id}`}
+                                            isActive={isActive}
                                         >
-                                            {isMobile ? (
-                                                <SheetClose asChild>{link}</SheetClose>
-                                            ) : (
-                                                link
-                                            )}
+                                            <Link
+                                                prefetch
+                                                href={`/users/${subscription.user.id}`}
+                                                className="flex items-center gap-4"
+                                            >
+                                                <UserAvatar
+                                                    size="xs"
+                                                    imageUrl={subscription.user.imageUrl}
+                                                    name={subscription.user.name}
+                                                />
+                                                <span className="text-sm">MovieHub Team</span>
+                                            </Link>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
                                 );
@@ -101,19 +82,14 @@ export const SubscriptionsSection = () => {
                                 asChild
                                 isActive={pathname === "/subscriptions"}
                             >
-                                {isMobile ? (
-                                    <SheetClose asChild>
-                                        <Link prefetch href="/subscriptions" className="flex items-center gap-4">
-                                            <ListIcon className="size-4" />
-                                            <span className="text-sm">All subscriptions</span>
-                                        </Link>
-                                    </SheetClose>
-                                ) : (
-                                    <Link prefetch href="/subscriptions" className="flex items-center gap-4">
-                                        <ListIcon className="size-4" />
-                                        <span className="text-sm">All subscriptions</span>
-                                    </Link>
-                                )}
+                                <Link
+                                    prefetch
+                                    href="/subscriptions"
+                                    className="flex items-center gap-4"
+                                >
+                                    <ListIcon className="size-4" />
+                                    <span className="text-sm">All subscriptions</span>
+                                </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     )}

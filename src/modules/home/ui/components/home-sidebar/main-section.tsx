@@ -1,9 +1,10 @@
 "use client";
 
-import { SidebarGroup,
-    SidebarGroupContent, 
-    SidebarMenu, 
-    SidebarMenuButton, 
+import {
+    SidebarGroup,
+    SidebarGroupContent,
+    SidebarMenu,
+    SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
@@ -11,8 +12,6 @@ import { FlameIcon, HomeIcon, PlaySquareIcon } from "lucide-react";
 import Link from "next/link";
 import { useAuth, useClerk } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
-import { SheetClose } from "@/components/ui/sheet";
-import { useEffect, useState } from "react";
 
 const items = [
     {
@@ -37,17 +36,6 @@ export const MainSection = () => {
     const clerk = useClerk();
     const { isSignedIn } = useAuth();
     const pathname = usePathname();
-    
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 568);  // 768 was the accurate value for every width
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => window.removeEventListener("resize", checkMobile);
-    }, []);
-
-    // const Wrapper = isMobile ? SheetClose : "div";
 
     return (
         <SidebarGroup>
@@ -56,23 +44,6 @@ export const MainSection = () => {
                     {items.map((item) => {
                         const isActive = pathname === item.url;
 
-                        const link = (
-                            <Link
-                                prefetch
-                                href={item.url}
-                                className="flex items-center gap-4"
-                                onClick={(e) => {
-                                    if (!isSignedIn && item.auth) {
-                                        e.preventDefault();
-                                        clerk.openSignIn();
-                                    }
-                                }}
-                            >
-                                <item.icon />
-                                <span className="text-sm">{item.title}</span>
-                            </Link>
-                        );
-
                         return (
                             <SidebarMenuItem key={item.title}>
                                 <SidebarMenuButton
@@ -80,11 +51,20 @@ export const MainSection = () => {
                                     asChild
                                     isActive={isActive}
                                 >
-                                    {isMobile ? (
-                                        <SheetClose asChild>{link}</SheetClose>
-                                    ) : (
-                                        link
-                                    )}
+                                    <Link
+                                        prefetch
+                                        href={item.url}
+                                        className="flex items-center gap-4"
+                                        onClick={(e) => {
+                                            if (!isSignedIn && item.auth) {
+                                                e.preventDefault();
+                                                clerk.openSignIn();
+                                            }
+                                        }}
+                                    >
+                                        <item.icon />
+                                        <span className="text-sm">{item.title}</span>
+                                    </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         );
@@ -92,5 +72,5 @@ export const MainSection = () => {
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
-    )
-}
+    );
+};

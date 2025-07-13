@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 // import { InPagePushAd } from "@/components/InPagePushAd";
 import { IndustrialAd } from "@/components/IndustrialAd";
 import { VintageAd } from "@/components/VintageAd";
+import BottomNav from "@/components/BottonNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,6 +41,7 @@ export default function RootLayout({
               <PopunderAd />
               <PushNotificationAd /> */}
               {children}
+              <BottomNav/>
             </TRPCProvider>
           </body>
         </html>
