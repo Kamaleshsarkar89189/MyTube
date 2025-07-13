@@ -20,10 +20,10 @@ export const TagFilterCarousel = ({
     isLoading,
 }: FilterCarouselProps) => {
     return (
-        <div className="w-full">
-            <h1 className="text-2xl font-bold text-center text-foreground mb-4">
+        <div className="w-full py-3 px-3 bg-white dark:bg-[#2c2c2c] shadow-sm transition-colors duration-300">
+            {/* <h1 className="text-2xl font-bold text-center text-foreground mb-4">
                 Categories
-            </h1>
+            </h1> */}
             <div className="flex flex-wrap gap-2">
                 {!isLoading && (
                     <div/>
