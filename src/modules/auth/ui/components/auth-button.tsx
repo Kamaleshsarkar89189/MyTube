@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { ClapperboardIcon, UserCircleIcon, UserIcon } from "lucide-react"
+import { ClapperboardIcon, ListIcon, UserCircleIcon, UserIcon } from "lucide-react"
 
 export const AuthButton = () => {
     return (
@@ -28,6 +28,11 @@ export const AuthButton = () => {
                             label="Studio"
                             href="/studio"
                             labelIcon={<UserIcon className="size-4" />}
+                        />
+                        <UserButton.Link
+                            label="All subscriptions"
+                            href="/subscriptions"
+                            labelIcon={<ListIcon className="size-4" />}
                         />
                         <UserButton.Action label="manageAccount" />
                     </UserButton.MenuItems>
