@@ -6,9 +6,9 @@ import {
     Home,
     Flame,
     History,
-    Bell,
     ListVideo,
     ThumbsUp,
+    Users,
 } from 'lucide-react';
 
 const navItems = [
@@ -25,12 +25,12 @@ const navItems = [
     {
         label: 'Subscriptions',
         href: '/feed/subscriptions',
-        icon: History,
+        icon: Users,
     },
     {
         label: 'History',
         href: '/playlists/history',
-        icon: Bell,
+        icon: History,
     },
     {
         label: 'Liked',
