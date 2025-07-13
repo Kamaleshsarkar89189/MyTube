@@ -10,6 +10,7 @@ import {
     ThumbsUp,
     Users,
 } from 'lucide-react';
+import { useAuth } from '@clerk/nextjs';
 
 const navItems = [
     {
@@ -47,6 +48,8 @@ const navItems = [
 
 export default function BottomNav() {
     const pathname = usePathname();
+    const { isSignedIn } = useAuth();
+    if (!isSignedIn) return null;
 
     return (
         <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden border-t border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow">
