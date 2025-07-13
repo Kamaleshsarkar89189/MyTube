@@ -36,12 +36,12 @@ export const CategoryButtons = () => {
 
     return (
         <div className="bg-white dark:bg-[#2c2c2c] py-4 px-2 transition-colors duration-300">
-            <div className="grid grid-cols-2 gap-3 max-w-md mx-auto">
+            <div className="grid grid-cols-2 gap-3 md:flex md:flex-nowrap md:justify-center md:gap-4 max-w-4xl mx-auto">
                 {categories.map((category, index) => (
                     <button
                         key={index}
                         onClick={() => handleRedirect(category.link)}
-                        className={`${category.colorClass} text-white text-sm md:text-base py-2 rounded font-bold shadow-md hover:opacity-90 transition`}
+                        className={`${category.colorClass} text-white text-sm md:text-base py-2 px-2 rounded font-bold shadow-md hover:opacity-90 transition`}
                     >
                         {category.label}
                     </button>
