@@ -41,6 +41,7 @@ export const InfiniteScroll = ({
                 You have reached the end of the list
                 </p>
             )}
+            <div className="h-5" />
         </div>
     )
 }
