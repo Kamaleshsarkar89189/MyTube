@@ -7,10 +7,10 @@ import { SearchIcon, XIcon } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 
-export const SearchInput = ({ }: { inputRef?: React.RefObject<HTMLInputElement | null> }) => {
+export const SearchInput = ({ inputRef }: { inputRef?: React.RefObject<HTMLInputElement | null> }) => {
     return (
         <Suspense fallback={<Skeleton className="h-10 w-full" />}>
-            <SearchInputSuspense />
+            <SearchInputSuspense inputRef={inputRef} />
         </Suspense>
     )
 }
