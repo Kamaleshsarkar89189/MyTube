@@ -24,7 +24,7 @@ export const TagFilterCarousel = ({
             {/* <h1 className="text-2xl font-bold text-center text-foreground mb-4">
                 Categories
             </h1> */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-start lg:justify-center">
                 {!isLoading && (
                     <div/>
                 )}

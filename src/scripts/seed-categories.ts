@@ -4,23 +4,10 @@ import { categories } from "@/db/schema";
 // const { categories } = require("@/db/schema")
 
 const categoryNames = [
-    "Cars and vehicles",
-    "Comedy",
-    "Education",
-    "Gaming",
-    "Entertainment",
-    "Film and animation",
-    "How-to and style",
-    "Bollywood Movies",
-    "Hollywood Movies",
-    "Hindi Dubbed Anime",
-    "Music",
-    "News and politics",
-    "People and blogs",
-    "Pets and animals",
-    "Science and technology",
-    "Sports",
-    "Travel and events",
+    "Dual Audio",
+    "Anime",
+    "Web Series",
+    "TV Shows",
 ];
 
 async function main() {

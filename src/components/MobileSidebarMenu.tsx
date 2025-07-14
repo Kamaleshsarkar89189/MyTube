@@ -50,12 +50,12 @@ export const MobileSidebarMenu = () => {
                         <Link href="/" className="font-semibold" onClick={handleClose}>HOME</Link>
                         <Link href="/?categoryId=c4459e46-d2c9-4c6c-a878-922b3db79662" onClick={handleClose}>Bollywood</Link>
                         <Link href="/?categoryId=6ef6af5b-ba7c-42d2-a7fa-ae5daa8a755e" onClick={handleClose}>Hollywood</Link>
-                        <Link href="/" onClick={handleClose} className="flex items-center gap-2">
+                        <Link href="/?categoryId=3d430af7-6cc7-4c11-ba5d-8fb9f9a67b4e" onClick={handleClose} className="flex items-center gap-2">
                             <span>🎧</span> Dual Audio
                         </Link>
-                        <Link href="/" onClick={handleClose}>Anime</Link>
-                        <Link href="/" onClick={handleClose}>Web Series</Link>
-                        <Link href="/" onClick={handleClose} className="flex items-center gap-2">
+                        <Link href="/?categoryId=74fcebb6-dc84-4464-a742-ceb73acd9d83" onClick={handleClose}>Anime</Link>
+                        <Link href="/?categoryId=02cf64dc-4a4f-4f58-ae21-af40cf4efbba" onClick={handleClose}>Web Series</Link>
+                        <Link href="/?categoryId=0582ae98-c136-42e9-a84a-337fe44943df" onClick={handleClose} className="flex items-center gap-2">
                             <span>🖥️</span> TV Shows
                         </Link>
                         <hr />
