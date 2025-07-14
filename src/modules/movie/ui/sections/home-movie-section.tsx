@@ -9,6 +9,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 interface HomeVideosSectionProps {
     categoryId?: string;
+    categoryName?: string;
 }
 
 export const HomeMovieSection = (props: HomeVideosSectionProps) => {
@@ -34,7 +35,7 @@ const HomeVideosSectionSkeleton = () => {
     );
 };
 
-const HomeVideosSectionSuspense = ({ categoryId }: HomeVideosSectionProps) => {
+const HomeVideosSectionSuspense = ({ categoryId, categoryName }: HomeVideosSectionProps) => {
     const [videos, query] = trpc.videos.getMany.useSuspenseInfiniteQuery(
         { categoryId, limit: DEFAULT_LIMIT_FEED },
         {
@@ -43,6 +44,14 @@ const HomeVideosSectionSuspense = ({ categoryId }: HomeVideosSectionProps) => {
     );
     return (
         <div className="bg-muted px-4 py-8 text-white">
+            <div className="my-2">
+                <div className="border-t border-white/20 mb-2" />
+                <p className="text-sm text-muted-foreground">MovieHub
+                    {categoryName ? (
+                        <span className="text-white"> &nbsp;&gt;&gt;&nbsp; {categoryName}</span>
+                    ) : null}
+                </p>
+            </div>
             <div
                 className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 [@media(min-width:2200px)]:grid-cols-12 gap-4"
             >

@@ -57,6 +57,12 @@ const ResultsSectionSuspense = ({
 
     return (
         <>
+            {/* Search result label */}
+            {query && (
+                <div className="px-1 py-2 text-sm text-muted-foreground">
+                    Search result for: <span className="font-medium text-white">{query}</span>
+                </div>
+            )}
             <div className="grid grid-cols-2 gap-4 gap-y-6 px-2 md:hidden">
                 {results.pages
                     .flatMap((page) => page.items)
