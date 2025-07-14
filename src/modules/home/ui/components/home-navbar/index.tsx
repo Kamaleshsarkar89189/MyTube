@@ -49,15 +49,32 @@ export const HomeNavbar = () => {
         }
     }, [showSearch]);
 
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 10) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+
     return (
         <>
             {/* NAVIGATION BAR */}
-            <nav className="fixed top-0 left-0 right-0 h-16 bg-background flex items-center px-2 pr-5 z-50 border-b border-border">
+            <nav className={`fixed top-0 left-0 right-0 h-16 flex items-center px-2 pr-5 z-50 transition-all duration-300 ${scrolled ? "bg-background/70 shadow-sm border-border" : "bg-background border-transparent"}
+`}>
                 <div className="flex items-center justify-between w-full">
                     {/* Left: Sidebar + Logo */}
                     <div className="flex items-center gap-2">
                         <SidebarTrigger className="hidden md:block" />
-                        <MobileSidebarMenu/>
+                        <MobileSidebarMenu />
                         <Link prefetch href="/" className="">
                             <div className="p-4 flex items-center gap-1">
                                 <h1 className="text-3xl font-bold">

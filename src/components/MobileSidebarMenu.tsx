@@ -24,7 +24,7 @@ export const MobileSidebarMenu = () => {
                 </SheetTrigger>
                 <SheetContent
                     side="left"
-                    className="w-[260px] sm:w-[300px] p-4 bg-background text-foreground"
+                    className="w-[260px] sm:w-[300px] p-4 bg-black/60 text-foreground border-muted"
                 >
                     {!isSignedIn && (
                         <div className="flex items-center justify-start gap-4 mt-6 mb-4">
