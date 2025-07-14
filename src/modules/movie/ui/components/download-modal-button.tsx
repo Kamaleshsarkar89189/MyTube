@@ -27,19 +27,25 @@ export function DownloadModalButton({ downloadOptions }: {
                         ⭑⭑ Download Links ⭑⭑
                     </div>
 
-                    {downloadOptions.map((option, index) => (
-                        <div key={index} className="mb-4 text-center">
-                            <div className="text-red-500 font-bold mb-2">{option.quality}</div>
-                            <a
-                                href={`/api/download?url=${encodeURIComponent(option.url)}&title=${encodeURIComponent(option.title)}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-block w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-2 rounded transition"
-                            >
-                                ⚡CLICK HERE TO DOWNLOAD ({option.size})⚡
-                            </a>
-                        </div>
-                    ))}
+                    {downloadOptions.map((option, index) => {
+                        const hasAllFields = option.url || option.size || option.quality;
+
+                        if (!hasAllFields) return null;
+
+                        return (
+                            <div key={index} className="mb-4 text-center">
+                                <div className="text-red-500 font-bold mb-2">{option.quality}</div>
+                                <a
+                                    href={`/api/download?url=${encodeURIComponent(option.url)}&title=${encodeURIComponent(option.title)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-block w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-2 rounded transition"
+                                >
+                                    ⚡CLICK HERE TO DOWNLOAD ({option.size})⚡
+                                </a>
+                            </div>
+                        );
+                    })}
 
                     <Dialog.Close asChild>
                         <button className="absolute top-3 right-3 text-gray-300 hover:text-white transition">

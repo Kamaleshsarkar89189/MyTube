@@ -35,7 +35,7 @@ export const TagFilterCarousel = ({
                         </div>
                     ))}
                 {!isLoading &&
-                    [...data].reverse().map((item) => (
+                    [...data].slice(0, 6).map((item) => (
                         <div key={item.value} onClick={() => onSelect(item.value)}>
                             <Badge
                                 variant={value === item.value ? "default" : "secondary"}

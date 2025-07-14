@@ -13,6 +13,7 @@ import { ResponsiveModal } from "@/components/responsive-modal";
 import { StudioUploader } from "@/modules/studio/ui/components/studio-uploader";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useRef, useState } from "react";
+import { MobileSidebarMenu } from "@/components/MobileSidebarMenu";
 
 export const HomeNavbar = () => {
     const router = useRouter();
@@ -56,6 +57,7 @@ export const HomeNavbar = () => {
                     {/* Left: Sidebar + Logo */}
                     <div className="flex items-center gap-2">
                         <SidebarTrigger className="hidden md:block" />
+                        <MobileSidebarMenu/>
                         <Link prefetch href="/" className="">
                             <div className="p-4 flex items-center gap-1">
                                 <h1 className="text-3xl font-bold">

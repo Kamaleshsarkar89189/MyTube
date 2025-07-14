@@ -100,19 +100,25 @@ export const VideoTopRow = ({ video }: VideoTopRowProps) => {
                             <DownloadModalButton
                                 downloadOptions={[
                                     {
-                                        quality: "1080p",
+                                        quality: video.downloadQualityThree ?? "",
+                                        size: video.downloadUrlThreeSize ?? "",
+                                        url: video.downloadUrlThree ?? "", 
+                                        title: video.title,
+                                    },
+                                    {
+                                        quality: video.downloadQualityTwo ?? "",
                                         size: video.downloadUrlTwoSize ?? "",
                                         url: video.downloadUrlTwo ?? "", 
                                         title: video.title,
                                     },
                                     {
-                                        quality: "720p",
+                                        quality: video.downloadQualityOne ?? "",
                                         size: video.downloadUrlOneSize ?? "",
                                         url: video.downloadUrlOne ?? "",
                                         title: video.title,
                                     },
                                     {
-                                        quality: "480p",
+                                        quality: video.videoQuality ?? "",
                                         size: video.videoUrlSize ?? "",
                                         url: video.videoUrl ?? "",
                                         title: video.title,
