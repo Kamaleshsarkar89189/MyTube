@@ -260,6 +260,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                         <div className="space-y-8 lg:col-span-3">
+                            {/* Title */}
                             <FormField
                                 control={form.control}
                                 name="title"
@@ -298,6 +299,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                     </FormItem>
                                 )}
                             />
+                            {/* Description */}
                             <FormField
                                 control={form.control}
                                 name="description"
@@ -656,6 +658,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                     </FormItem>
                                 )}
                             />
+                            {/* Category */}
                             <FormField
                                 control={form.control}
                                 name="categoryId"
@@ -667,9 +670,10 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                         <Select
                                             onValueChange={field.onChange}
                                             defaultValue={field.value ?? undefined}
+                                            disabled={!isAdmin}
                                         >
                                             <FormControl>
-                                                <SelectTrigger>
+                                                <SelectTrigger className={!isAdmin ? "cursor-not-allowed opacity-75" : ""}>
                                                     <SelectValue placeholder="Select a category" />
                                                 </SelectTrigger>
                                             </FormControl>
@@ -745,7 +749,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
 
                                 </div>
                             </div>
-
+                                {/* Visibility */}
                             <FormField
                                 control={form.control}
                                 name="visibility"
@@ -757,9 +761,10 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                         <Select
                                             onValueChange={field.onChange}
                                             defaultValue={field.value ?? undefined}
+                                            disabled={!isAdmin}
                                         >
                                             <FormControl>
-                                                <SelectTrigger>
+                                                <SelectTrigger className={!isAdmin ? "cursor-not-allowed opacity-75" : ""}>
                                                     <SelectValue placeholder="Select visibility" />
                                                 </SelectTrigger>
                                             </FormControl>
@@ -796,7 +801,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     </div>
                 </form>
             </Form>
-
+            {/* Dialog for delete confirmation */}
             <Dialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
                 <DialogContent>
                     <DialogHeader>
