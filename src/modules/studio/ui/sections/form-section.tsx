@@ -349,7 +349,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                             <FormLabel>
                                                 <div className="flex items-center gap-4">
                                                     <span className="flex items-center gap-2">
-                                                        Video URL (480p)
+                                                        Video URL
                                                         <FormField
                                                             control={form.control}
                                                             name="videoQuality"
@@ -419,7 +419,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                                                 <Input
                                                                     {...field}
                                                                     value={field.value ?? ""}
-                                                                    placeholder="Quality (e.g.,720p)"
+                                                                    placeholder="(e.g.,720p)"
                                                                     type="text"
                                                                     readOnly={!isAdmin}
                                                                     disabled={!isAdmin}
