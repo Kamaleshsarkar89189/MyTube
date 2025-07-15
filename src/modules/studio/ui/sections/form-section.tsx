@@ -423,7 +423,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                                                                     type="text"
                                                                     readOnly={!isAdmin}
                                                                     disabled={!isAdmin}
-                                                                    className={`h-8 w-40 text-xs ${!isAdmin ? "bg-muted text-muted-foreground cursor-not-allowed" : ""}`}
+                                                                    className={`h-8 w-28 text-xs ${!isAdmin ? "bg-muted text-muted-foreground cursor-not-allowed" : ""}`}
                                                                 />
                                                             )}
                                                         />
