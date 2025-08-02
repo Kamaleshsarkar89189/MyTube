@@ -62,83 +62,37 @@ export const POST = async (request: Request) => {
                 .where(eq(videos.muxUploadId, data.upload_id));
             break;
         }
-        // case "video.asset.ready": {
-        //     const data = payload.data as VideoAssetReadyWebhookEvent["data"];
-        //     const playbackId = data.playback_ids?.[0].id;
-
-        //     if (!data.upload_id) {
-        //         return new Response("Missing upload ID", { status: 400 });
-        //     }
-        //     if (!playbackId) {
-        //         return new Response("Missing playback ID", { status: 400 });
-        //     }
-
-        //     const tempThumbnailUrl = `https://image.mux.com/${playbackId}/thumbnail.jpg`;
-        //     const tempPreviewUrl = `https://image.mux.com/${playbackId}/animated.gif`;
-        //     const duration = data.duration ? Math.round(data.duration * 1000) : 0;
-
-        //     const utapi = new UTApi();
-        //     const [
-        //         uploadedThumbnail,
-        //         uploadedPreview,
-        //     ] = await utapi.uploadFilesFromUrl([
-        //         tempThumbnailUrl,
-        //         tempPreviewUrl,
-        //     ]);
-
-        //     if (!uploadedThumbnail.data || !uploadedPreview.data) {
-        //         return new Response("Failed to upload thumbnail or preview", { status: 500 });
-        //     }
-
-        //     const { key: thumbnailKey, url: thumbnailUrl } = uploadedThumbnail.data;
-        //     const { key: previewKey, url: previewUrl } = uploadedPreview.data;
-
-
-        //     await db
-        //         .update(videos)
-        //         .set({
-        //             muxStatus: data.status,
-        //             muxPlaybackId: playbackId,
-        //             muxAssetId: data.id,
-        //             thumbnailUrl,
-        //             thumbnailKey,
-        //             previewUrl,
-        //             previewKey,
-        //             duration,
-        //         })
-        //         .where(eq(videos.muxUploadId, data.upload_id));
-        //     break;
-        // }
-
         case "video.asset.ready": {
             const data = payload.data as VideoAssetReadyWebhookEvent["data"];
             const playbackId = data.playback_ids?.[0].id;
 
-            if (!data.upload_id || !playbackId) {
-                return new Response("Missing upload ID or playback ID", { status: 400 });
+            if (!data.upload_id) {
+                return new Response("Missing upload ID", { status: 400 });
+            }
+            if (!playbackId) {
+                return new Response("Missing playback ID", { status: 400 });
             }
 
-            // 👇 Fetch full asset details to get MP4 download URLs
-            //@ts-expect-error
-            const fullAsset = await mux.assets.get(data.id);
-
-            const mp4Files = (fullAsset.files || []).filter(
-                //@ts-expect-error
-                (file) => file.type === "video/mp4"
-                //@ts-expect-error
-            ).map((file) => ({
-                height: file.height,
-                url: file.url,
-            }));
-
-            // 👇 Upload thumbnails
+            const tempThumbnailUrl = `https://image.mux.com/${playbackId}/thumbnail.jpg`;
+            const tempPreviewUrl = `https://image.mux.com/${playbackId}/animated.gif`;
+            const duration = data.duration ? Math.round(data.duration * 1000) : 0;
+            
             const utapi = new UTApi();
-            const [uploadedThumbnail, uploadedPreview] = await utapi.uploadFilesFromUrl([
-                `https://image.mux.com/${playbackId}/thumbnail.jpg`,
-                `https://image.mux.com/${playbackId}/animated.gif`,
+            const [
+                uploadedThumbnail,
+                uploadedPreview,
+            ] = await utapi.uploadFilesFromUrl([
+                tempThumbnailUrl,
+                tempPreviewUrl,
             ]);
 
-            const duration = data.duration ? Math.round(data.duration * 1000) : 0;
+            if (!uploadedThumbnail.data || !uploadedPreview.data) {
+                return new Response("Failed to upload thumbnail or preview", { status: 500 });
+            }
+
+            const { key: thumbnailKey, url: thumbnailUrl } = uploadedThumbnail.data;
+            const { key: previewKey, url: previewUrl } = uploadedPreview.data;
+
 
             await db
                 .update(videos)
@@ -146,18 +100,15 @@ export const POST = async (request: Request) => {
                     muxStatus: data.status,
                     muxPlaybackId: playbackId,
                     muxAssetId: data.id,
-                    thumbnailUrl: uploadedThumbnail.data?.url,
-                    thumbnailKey: uploadedThumbnail.data?.key,
-                    previewUrl: uploadedPreview.data?.url,
-                    previewKey: uploadedPreview.data?.key,
+                    thumbnailUrl,
+                    thumbnailKey,
+                    previewUrl,
+                    previewKey,
                     duration,
-                    mp4Files, // ✅ Store download links by quality
                 })
                 .where(eq(videos.muxUploadId, data.upload_id));
-
             break;
         }
-
 
         case "video.asset.errored": {
             const data = payload.data as VideoAssetErroredWebhookEvent["data"];
