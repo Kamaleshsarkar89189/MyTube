@@ -119,13 +119,13 @@ export const POST = async (request: Request) => {
             }
 
             // 👇 Fetch full asset details to get MP4 download URLs
-            //@ts-ignore
+            //@ts-expect-error
             const fullAsset = await mux.assets.get(data.id);
 
             const mp4Files = (fullAsset.files || []).filter(
-                //@ts-ignore
+                //@ts-expect-error
                 (file) => file.type === "video/mp4"
-                //@ts-ignore
+                //@ts-expect-error
             ).map((file) => ({
                 height: file.height,
                 url: file.url,
