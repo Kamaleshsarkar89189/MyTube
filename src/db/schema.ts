@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { foreignKey, integer, pgEnum, pgTable, primaryKey, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
+import { foreignKey, integer, jsonb, pgEnum, pgTable, primaryKey, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 import {
     createInsertSchema,
     createSelectSchema,
@@ -157,6 +157,7 @@ export const videos = pgTable("videos", {
     previewUrl: text("preview_url"),
     previewKey: text("preview_key"),
     duration: integer("duration").default(0).notNull(),
+    mp4Files: jsonb("mp4_files").$type<Array<{ height: number; url: string }>>().default([]),
     visibility: videoVisibility("visibility").default("private").notNull(),
     userId: uuid("user_id").references(() => users.id, {
         onDelete: "cascade",
