@@ -8,8 +8,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 // import PushNotificationAd from "@/components/PushNotificationAd";
 // import PopunderAd from "@/components/PopunderAd";
 // import { InPagePushAd } from "@/components/InPagePushAd";
-import { IndustrialAd } from "@/components/IndustrialAd";
-import { VintageAd } from "@/components/VintageAd";
+// import { IndustrialAd } from "@/components/IndustrialAd";
+// import { VintageAd } from "@/components/VintageAd";
 // import BottomNav from "@/components/BottonNav";
 
 const inter = Inter({ subsets: ["latin"] });
