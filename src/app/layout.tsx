@@ -35,8 +35,8 @@ export default function RootLayout({
             className={inter.className}>
             <TRPCProvider>
               <Toaster />
-              <VintageAd/>
-              <IndustrialAd/>
+              {/* <VintageAd/> */}
+              {/* <IndustrialAd/> */}
               {/* <InPagePushAd/>
               <PopunderAd />
               <PushNotificationAd /> */}
